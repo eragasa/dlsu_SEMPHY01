@@ -1,0 +1,556 @@
+\documentclass[11pt,a4paper]{article}
+
+% -----------------------------------------------------------------------------
+% Long Assessment 1 report skeleton
+% Adapt, combine, or reorder sections to support your own scientific argument.
+% Delete all TODO text and unused examples before submission.
+% -----------------------------------------------------------------------------
+
+\usepackage[margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,tabularx,array,multirow}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  citecolor=ForestGreen,
+  urlcolor=BrickRed,
+  pdftitle={SEMPHY01 Long Assessment 1},
+  pdfauthor={Student Name}
+}
+
+\sisetup{
+  scientific-notation=true,
+  separate-uncertainty=true,
+  per-mode=symbol
+}
+
+\graphicspath{{../figures/}{figures/}}
+\setlist{nosep}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\renewcommand{\arraystretch}{1.15}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\lhead{SEMPHY01 --- Long Assessment 1}
+\rhead{\studentname}
+\cfoot{\thepage}
+
+% ---------- Student-editable metadata ----------------------------------------
+\newcommand{\studentname}{TODO: Student Name}
+\newcommand{\studentid}{TODO: Student ID}
+\newcommand{\materialname}{TODO: Material and phase/polytype}
+\newcommand{\submissiondate}{TODO: Submission date}
+\newcommand{\repositoryurl}{https://example.invalid/replace-me}
+\newcommand{\physkitversion}{TODO: PhysKit version/commit}
+
+% ---------- Frequently used notation ----------------------------------------
+\newcommand{\kB}{k_{\mathrm B}}
+\newcommand{\Ec}{E_{\mathrm C}}
+\newcommand{\Ev}{E_{\mathrm V}}
+\newcommand{\Eg}{E_{\mathrm g}}
+\newcommand{\mui}{\mu_{\mathrm i}}
+\newcommand{\Nc}{N_{\mathrm C}}
+\newcommand{\Nv}{N_{\mathrm V}}
+\newcommand{\nIntrinsic}{n_{\mathrm i}}
+\newcommand{\todo}[1]{\textcolor{BrickRed}{\textbf{TODO:} #1}}
+
+% A compiling placeholder for figures that are not ready yet.
+\newcommand{\placeholderfigure}[3][0.82\linewidth]{%
+  \begin{figure}[htbp]
+    \centering
+    \fbox{\parbox[c][45mm][c]{#1}{\centering #2}}
+    \caption{#2}
+    \label{#3}
+  \end{figure}
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  {\Large De La Salle University\par}
+  \vspace{8mm}
+  {\large SEMPHY01 --- Semiconductor Physics\par}
+  \vspace{18mm}
+  {\Huge\bfseries Long Assessment 1\par}
+  \vspace{4mm}
+  {\LARGE From Bloch Bands to Equilibrium Semiconductor Carrier Statistics\par}
+  \vspace{18mm}
+
+  \begin{tabular}{@{}rl@{}}
+    Student: & \studentname \\
+    Student ID: & \studentid \\
+    Selected material: & \materialname \\
+    Submission date: & \submissiondate \\
+    Computational record: & \url{\repositoryurl} \\
+    PhysKit version: & \physkitversion
+  \end{tabular}
+
+  \vfill
+  \begin{minipage}{0.88\textwidth}
+    \small
+    This report concerns equilibrium carrier statistics only. Transport,
+    mobility, conductivity, device behavior, and spatial band bending are
+    outside the model unless explicitly identified as excluded context.
+  \end{minipage}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% =============================================================================
+\section{Project declaration and scope}
+\label{sec:declaration}
+% =============================================================================
+
+\begin{table}[htbp]
+  \centering
+  \caption{Declared scope of the material model.}
+  \label{tab:declaration}
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.25\textwidth}X@{}}
+    \toprule
+    Item & Declaration \\
+    \midrule
+    Material identity & \todo{Chemical formula and exact phase/polytype.} \\
+    Sample model & \todo{Ideal bulk model and temperature range.} \\
+    Gap model & \todo{Direct/indirect character and $\Eg(T)$ representation.} \\
+    Conduction edge & \todo{Location, equivalent valleys, and mass model.} \\
+    Valence edge & \todo{Relevant bands, degeneracies, and mass model.} \\
+    Statistics & \todo{Full Fermi--Dirac, Boltzmann comparison, or both.} \\
+    n-type model & \todo{Donor-like species/defect and charge states.} \\
+    p-type model & \todo{Acceptor-like species/defect and charge states.} \\
+    Exclusions & \todo{Omitted physics and why it is outside scope.} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Research question and modeling strategy}
+
+\todo{State the material-specific question investigated and summarize the path
+from the Bloch calculation to intrinsic and doped equilibrium statistics.}
+
+\subsection{Use of PhysKit and student-authored work}
+
+The complete PhysKit library may be used \cite{physkit}. Distinguish maintained
+package capabilities from your own configuration, analysis, extension, and
+interpretation.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Computational capability and contribution map.}
+  \label{tab:contributions}
+  \begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}p{0.23\textwidth}X@{}}
+    \toprule
+    Capability & Source & Configuration, extension, or validation performed \\
+    \midrule
+    Bloch Hamiltonian & PhysKit & \todo{Version, model, parameters, and checks.} \\
+    DOS/state counting & \todo{Source} & \todo{Normalization and validation.} \\
+    Carrier statistics & \todo{Source} & \todo{Integration/root-solving choices.} \\
+    Dopant model & \todo{Source} & \todo{Charge-state convention and extension.} \\
+    Visualization & \todo{Source} & \todo{How plots consume calculated results.} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Model map}
+
+\placeholderfigure{Replace with one compact diagram connecting
+$H(\mathbf{k})$, $E_n(\mathbf{k})$, effective masses, DOS, occupation,
+neutrality, and calculated carriers.}{fig:model-map}
+
+% =============================================================================
+\section{Part I: Bloch2D effective-mass reduction}
+\label{sec:bloch2d}
+% =============================================================================
+
+\subsection{Parent model and numerical representation}
+
+\todo{Describe the direct/reciprocal lattice, cell, boundary conditions,
+potential, representation, reciprocal cutoff or discretization, and units.
+Explain what PhysKit supplies and what you configured.}
+
+A useful operator statement is
+\begin{equation}
+  H_{\mathbf G\mathbf G'}(\mathbf k)
+  = \frac{\hbar^2\lvert\mathbf k+\mathbf G\rvert^2}{2m}
+    \delta_{\mathbf G\mathbf G'} + V_{\mathbf G-\mathbf G'}.
+  \label{eq:bloch-hamiltonian}
+\end{equation}
+
+\todo{Report a Hermiticity or equivalent operator-consistency check.}
+
+\subsection{Band path and full-zone calculation}
+
+\placeholderfigure{High-symmetry band path. Explain why it is interpretive but
+not a DOS integration mesh.}{fig:band-path}
+
+\placeholderfigure{Uniform two-dimensional Brillouin-zone edge map with located
+extrema.}{fig:edge-map}
+
+\subsection{Band edges and local quadratic model}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Located band edges and fit domains.}
+  \label{tab:band-edges}
+  \begin{tabular}{@{}llllll@{}}
+    \toprule
+    Edge & Band/sheet & $k_x$ & $k_y$ & Energy & Classification \\
+    \midrule
+    Valence maximum & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    Conduction minimum & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For a conduction minimum,
+\begin{equation}
+  E_c(\mathbf{k}_c+\mathbf q)
+  \simeq \Ec + \frac{\hbar^2}{2}
+  \mathbf q^{\mathsf T}\mathbf M_c^{-1}\mathbf q,
+\end{equation}
+with the sign reversed before defining a positive hole-mass tensor at a
+valence maximum.
+
+\todo{Describe the multidimensional fit, energy/radius window, tensor
+components, principal masses, principal directions, and any degeneracy or band
+folding that complicates the fit.}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Effective-mass tensor results.}
+  \label{tab:mass-tensors}
+  \begin{tabular}{@{}lrrrrrr@{}}
+    \toprule
+    Edge & $(M^{-1})_{xx}$ & $(M^{-1})_{xy}$ & $(M^{-1})_{yy}$
+         & $m_1/m_0$ & $m_2/m_0$ & Fit window \\
+    \midrule
+    Valence & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    Conduction & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Convergence, residuals, and range of validity}
+
+\placeholderfigure{Fit-window mass drift, mesh/cutoff convergence, and/or
+quadratic-fit residuals.}{fig:curvature-convergence}
+
+\todo{Separate representation error, $\mathbf k$-mesh error, fit-window error,
+and physical nonparabolicity. State a bounded energy range over which the
+parabolic approximation is adequate.}
+
+\subsection{Two-dimensional DOS and state counting}
+
+For one anisotropic parabolic valley,
+\begin{equation}
+  m_{d,2D}=\sqrt{m_1m_2}, \qquad
+  g_{2D}(E)=\frac{g_sg_vm_{d,2D}}{2\pi\hbar^2}\Theta(E-\Ec).
+\end{equation}
+
+\placeholderfigure{Numerical full-zone DOS and analytic parabolic DOS near the
+selected edge.}{fig:dos-2d}
+
+\todo{Verify integrated state counts and discuss mesh spacing, broadening,
+finite bandwidth, additional valleys/sheets, and nonparabolicity. Emphasize
+that these are two-dimensional sheet quantities.}
+
+% =============================================================================
+\section{Part II: Intrinsic three-dimensional model}
+\label{sec:intrinsic}
+% =============================================================================
+
+\subsection{Band-edge state model and DOS components}
+
+\todo{Define the energy reference, gap, all conduction valleys and valence
+bands, principal masses, and degeneracies. Explain whether quoted DOS masses
+already include valley multiplicity.}
+
+For each three-dimensional parabolic component,
+\begin{equation}
+  g_c(E)=\frac{g_sg_v}{4\pi^2}
+  \left(\frac{2}{\hbar^2}\right)^{3/2}
+  \sqrt{\det\mathbf M_c}\sqrt{E-\Ec}\,\Theta(E-\Ec),
+  \label{eq:dos-3d}
+\end{equation}
+with an analogous expression below $\Ev$ for holes.
+
+\begin{table}[htbp]
+  \centering
+  \scriptsize
+  \caption{Components of the effective densities of states at a representative temperature.}
+  \label{tab:nc-nv-components}
+  \begin{tabular}{@{}lrrrrrl@{}}
+    \toprule
+    Component & $g_s$ & $g_v$ & $m_1/m_0$ & $m_2/m_0$ & $m_3/m_0$ & Contribution \\
+    \midrule
+    \todo{Conduction valley} & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    \todo{Valence band} & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Fermi--Dirac occupation and carrier integrals}
+
+\begin{align}
+  f(E,\mu,T) &= \frac{1}{1+\exp[(E-\mu)/(\kB T)]}, \\
+  n(\mu,T) &= \int_{\Ec}^{\infty}g_c(E)f(E,\mu,T)\,dE, \\
+  p(\mu,T) &= \int_{-\infty}^{\Ev}g_v(E)[1-f(E,\mu,T)]\,dE.
+\end{align}
+
+\todo{Explain stable evaluation, units, integration method, cutoffs, tolerances,
+and convergence evidence.}
+
+\subsection{Intrinsic neutrality and nondegenerate comparison}
+
+\begin{equation}
+  n(\mui,T)-p(\mui,T)=0.
+\end{equation}
+
+\todo{Report the root bracket, tolerance, residual, and temperature sweep.}
+
+\begin{align}
+  \nIntrinsic &= \sqrt{\Nc\Nv}\exp\left(-\frac{\Eg}{2\kB T}\right), \\
+  \mui &= \frac{\Ec+\Ev}{2}
+  +\frac{\kB T}{2}\ln\left(\frac{\Nv}{\Nc}\right).
+\end{align}
+
+\placeholderfigure{Three-dimensional DOS and occupation at one temperature.}{fig:dos-3d}
+\placeholderfigure{Intrinsic chemical potential and carrier concentration versus temperature.}{fig:intrinsic-temperature}
+
+\todo{Compare full Fermi--Dirac integration with the nondegenerate limit and
+identify when they agree.}
+
+\subsection{Silicon control and validation evidence}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Silicon control at \SI{300}{\kelvin}.}
+  \label{tab:silicon-control}
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+    Quantity & Input/result & Reference value & Difference & Interpretation \\
+    \midrule
+    $\Eg$ & \todo{ } & approximately \SI{1.12}{\electronvolt} & \todo{ } & \todo{ } \\
+    $\nIntrinsic$ & \todo{ } & approximately $1.5\times10^{10}\,\si{\per\centi\meter\cubed}$ & \todo{ } & \todo{ } \\
+    $\mui$ & \todo{ } & \todo{source-dependent} & \todo{ } & \todo{ } \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\todo{Summarize automated or reproducible checks for monotonicity, energy-shift
+invariance, isotropic/anisotropic limits, $T^{3/2}$ scaling, neutrality, and
+integration convergence.}
+
+% =============================================================================
+\section{Part III: Literature-based material reconstruction}
+\label{sec:material}
+% =============================================================================
+
+\subsection{Source strategy and parameter provenance}
+
+\todo{Explain how curated sources, primary literature, reviews, and published
+band information were reconciled. Do not mix phases or definitions silently.}
+
+\scriptsize
+\begin{longtable}{@{}p{0.14\textwidth}p{0.08\textwidth}p{0.13\textwidth}p{0.07\textwidth}p{0.11\textwidth}p{0.14\textwidth}p{0.18\textwidth}@{}}
+  \caption{Material-parameter provenance.}\label{tab:provenance}\\
+  \toprule
+  Quantity & Symbol & Value/model & Unit & Temperature & Definition & Source \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Quantity & Symbol & Value/model & Unit & Temperature & Definition & Source \\
+  \midrule
+  \endhead
+  Band gap & $\Eg$ & \todo{ } & eV & \todo{ } & direct/indirect & \todo{cite} \\
+  Electron mass & $\mathbf M_c$ & \todo{ } & $m_0$ & \todo{ } & curvature/DOS & \todo{cite} \\
+  Hole mass & $\mathbf M_v$ & \todo{ } & $m_0$ & \todo{ } & HH/LH/DOS & \todo{cite} \\
+  Valley count & $g_v$ & \todo{ } & 1 & \todo{ } & included in mass? & \todo{cite} \\
+  Published $\Nc$ & $\Nc$ & \todo{ } & cm$^{-3}$ & \todo{ } & measured/derived & \todo{cite} \\
+  Published $\Nv$ & $\Nv$ & \todo{ } & cm$^{-3}$ & \todo{ } & measured/derived & \todo{cite} \\
+  Published $\nIntrinsic$ & $\nIntrinsic$ & \todo{ } & cm$^{-3}$ & \todo{ } & method & \todo{cite} \\
+  \bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Band-diagram interpretation}
+
+\placeholderfigure{Published or properly redrawn/digitized band information.
+Include attribution and reciprocal-space convention.}{fig:published-band}
+\clearpage
+
+\todo{Identify edge locations, direct/indirect character, multiplicity, nearby
+bands, anisotropy, nonparabolicity, and limitations of the plotted path.}
+
+\subsection{Material model and intrinsic results}
+
+\todo{Define $\Eg(T)$, modeled components, temperature range, and any
+material-specific use or extension of PhysKit.}
+
+\placeholderfigure{Calculated $\Nc(T)$, $\Nv(T)$, $\mui(T)$, and/or $\nIntrinsic(T)$ for the selected material.}{fig:material-intrinsic}
+
+\subsection{Published comparison and sensitivity}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Comparison with independent published data.}
+  \label{tab:published-comparison}
+  \begin{tabular}{@{}lllllll@{}}
+    \toprule
+    Quantity & $T$ & Calculated & Published & Unit & Difference & Source \\
+    \midrule
+    \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{cite} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\placeholderfigure{Sensitivity of $\nIntrinsic$ and $\mui$ to gap and electron/hole mass assumptions.}{fig:sensitivity}
+
+\todo{Separate numerical error, parameter uncertainty, and physical model
+limitations when interpreting disagreement.}
+
+% =============================================================================
+\section{Part IV: Equilibrium doping}
+\label{sec:doping}
+% =============================================================================
+
+\subsection{Donor and acceptor models}
+
+\begin{table}[htbp]
+  \centering
+  \scriptsize
+  \caption{Dopant or defect-level provenance.}
+  \label{tab:dopants}
+  \begin{tabularx}{\textwidth}{@{}lXXXXXX@{}}
+    \toprule
+    Kind & Species/site & Level & Charge states & Degeneracy convention & Range & Source/limitations \\
+    \midrule
+    Donor & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{cite} \\
+    Acceptor & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{ } & \todo{cite} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+With the explicitly declared degeneracy convention, one possible model is
+\begin{align}
+  N_D^+ &= \frac{N_D}{1+g_D\exp[(\mu-E_D)/(\kB T)]}, \\
+  N_A^- &= \frac{N_A}{1+g_A\exp[(E_A-\mu)/(\kB T)]}, \\
+  0 &= p+N_D^+-n-N_A^-.
+\end{align}
+
+\todo{Explain the convention, low/high-temperature behavior, solver bracket,
+and neutrality residual.}
+
+\subsection{Representative intrinsic, n-type, p-type, and compensated cases}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Modeled equilibrium cases.}
+  \label{tab:doping-cases}
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+    Case & $N_D$ & $N_A$ & Temperature range & Physical purpose \\
+    \midrule
+    Intrinsic & 0 & 0 & \todo{ } & baseline \\
+    n-type & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    compensated n-type & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    p-type & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    compensated p-type & \todo{ } & \todo{ } & \todo{ } & \todo{ } \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\placeholderfigure{$\mu(T)$ relative to band and dopant levels, with no implied spatial band bending.}{fig:doped-mu}
+\placeholderfigure{Log-scale $n(T)$ and $p(T)$ for representative cases.}{fig:doped-carriers}
+\placeholderfigure{Ionized fractions and neutrality residuals.}{fig:ionization}
+\placeholderfigure{Carrier populations versus nominal dopant concentration.}{fig:concentration-sweep}
+
+\subsection{Approximation comparison and regimes}
+
+\todo{Identify freeze-out, extrinsic, intrinsic, and degenerate/non-Boltzmann
+regimes where physically accessible. Compare incomplete and full ionization,
+and state where the simpler result differs by less than five percent.}
+
+% =============================================================================
+\section{Synthesis and bounded validity}
+\label{sec:synthesis}
+% =============================================================================
+
+\subsection{What transfers from Bloch2D to the real material?}
+
+\todo{Separate transferable numerical ideas---curvature fitting, state counting,
+occupation, convergence---from dimensionality and material-specific physics
+that do not transfer directly.}
+
+\subsection{Adequacy of the final model}
+
+\todo{Answer quantitatively: over what temperature and concentration range is
+the effective-mass plus equilibrium dopant model adequate, and which omitted
+physical effect is most likely to invalidate it first?}
+
+\subsection{Main conclusion}
+
+\todo{Give a concise answer supported by your most decisive table and figure.}
+
+% =============================================================================
+\section{Reproducibility and validation record}
+\label{sec:reproducibility}
+% =============================================================================
+
+\begin{table}[htbp]
+  \centering
+  \caption{Computational environment and execution record.}
+  \label{tab:environment}
+  \begin{tabularx}{\textwidth}{@{}p{0.28\textwidth}X@{}}
+    \toprule
+    Item & Value \\
+    \midrule
+    Repository/archive & \url{\repositoryurl} \\
+    Python version & \todo{ } \\
+    PhysKit version/commit & \physkitversion \\
+    Main dependencies & \todo{ } \\
+    Run order & \todo{ } \\
+    Random seeds, if any & \todo{ } \\
+    Clean-run result & \todo{ } \\
+    Test/validation summary & \todo{ } \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\todo{State how the submitted figures and tables can be regenerated. Disclose
+materially reused code, data, and computational assistance according to course
+policy.}
+
+\clearpage
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\appendix
+\section{Supplementary convergence and validation evidence}
+
+\todo{Place useful evidence here when it would interrupt the main argument.
+Do not use the appendix to hide checks needed to support a main conclusion.}
+
+\section{Additional parameter and provenance records}
+
+\todo{Include extended tables, digitization details, or source-definition
+comparisons if needed.}
+
+\end{document}

@@ -4,6 +4,12 @@ Course repository for DLSU course `SEMPHY01`.
 
 Historical source material is preserved without normalization under `legacy/`.
 
+## Current assessment
+
+- [`assessments/long-assessment-1.md`](assessments/long-assessment-1.md) — broad, individually scoped Long Assessment 1 brief for the four-student course.
+- [`templates/long-assessment-1-report-template.tex`](templates/long-assessment-1-report-template.tex) — editable LaTeX report skeleton.
+- [`templates/long-assessment-1-report-template.pdf`](templates/long-assessment-1-report-template.pdf) — compiled report skeleton for preview.
+
 ## Assessment notebooks
 
 - [`notebooks/01_bloch2d_validation.ipynb`](notebooks/01_bloch2d_validation.ipynb) — executed PhysKit checkerboard-band, effective-mass, 2D DOS, and intrinsic sheet-statistics validation.
