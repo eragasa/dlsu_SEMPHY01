@@ -1,0 +1,5 @@
+# PhysKit release used by notebooks/01_bloch2d_validation.ipynb
+# Requires Python 3.14 or newer.
+projectkoios-physkit @ git+https://github.com/eragasa/projectkoios-physkit.git@d6333208a1ff723682a557afd593a5c932058cb7
+jupyterlab>=4.4,<5
+pytest>=8,<10

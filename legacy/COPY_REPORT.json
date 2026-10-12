@@ -1,0 +1,43 @@
+{
+  "course_repository": "dlsu_SEMPHY01",
+  "copied_at": "2026-09-15T03:50:39.512761+00:00",
+  "copy_policy": {
+    "preserve_source_layout": true,
+    "excluded_directories": [
+      ".conda",
+      ".egg-info",
+      ".git",
+      ".mypy_cache",
+      ".nox",
+      ".pytest_cache",
+      ".quarto",
+      ".ruff_cache",
+      ".tox",
+      ".venv",
+      "__pycache__",
+      "_site",
+      "node_modules"
+    ],
+    "excluded_content": [
+      "OS/temp metadata",
+      "files explicitly identifiable as final grade records"
+    ],
+    "student_submissions": "not imported from Downloads"
+  },
+  "sources": [
+    {
+      "label": "gdrive-projectkoios-archive-sempy01",
+      "source": "/Users/eugene/Library/CloudStorage/GoogleDrive-eugene@projectkoios.com/My Drive/DLSU/05_courses/archive_courses/SEMPY01",
+      "status": "copied",
+      "files": 60,
+      "bytes": 18730021
+    }
+  ],
+  "excluded": [
+    {
+      "source": "gdrive-projectkoios-archive-sempy01",
+      "path": ".DS_Store",
+      "reason": "temporary or OS metadata"
+    }
+  ]
+}

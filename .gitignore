@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+.venv/
+.conda/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

@@ -1,0 +1,48 @@
+# Complete only after selecting one exact bulk phase/polytype.
+material:
+  formula: null
+  phase_or_polytype: null
+  sample_model: ideal 3D bulk crystal
+  temperature_range_K: [null, null]
+  exclusions:
+    - transport
+    - devices
+    - spatial band bending
+
+band_gap:
+  character: null  # direct or indirect
+  equation: null
+  value_unit: eV
+  source: null
+
+conduction_components: []
+# - label: null
+#   edge_location: null
+#   edge_offset_eV: 0.0
+#   principal_masses_m0: [null, null, null]
+#   valley_degeneracy: null
+#   mass_definition: curvature
+#   degeneracy_included_in_mass: false
+#   temperature_K: null
+#   source: null
+
+valence_components: []
+# - label: null
+#   edge_location: null
+#   edge_offset_eV: 0.0
+#   principal_masses_m0: [null, null, null]
+#   valley_degeneracy: null
+#   mass_definition: curvature
+#   degeneracy_included_in_mass: false
+#   temperature_K: null
+#   source: null
+
+dopants:
+  donor: null
+  acceptor: null
+
+published_controls:
+  Nc: null
+  Nv: null
+  intrinsic_concentration: null
+  intrinsic_chemical_potential: null
