@@ -2,30 +2,41 @@
 
 Course repository for DLSU course `SEMPHY01`.
 
-Historical source material is preserved without normalization under `legacy/`.
+## `dlsu_AY20262026T1`
 
-## Current assessment
+Long Assessment 1 is consolidated in
+[`dlsu_AY20262026T1/LA1/`](dlsu_AY20262026T1/LA1/). Its assessment brief,
+notebooks, source scaffold, tests, data, figures, dependency pin, and report
+template are all contained under that directory.
 
-- [`assessments/long-assessment-1.md`](assessments/long-assessment-1.md) — broad, individually scoped Long Assessment 1 brief for the four-student course.
-- [`templates/long-assessment-1-report-template.tex`](templates/long-assessment-1-report-template.tex) — editable LaTeX report skeleton.
-- [`templates/long-assessment-1-report-template.pdf`](templates/long-assessment-1-report-template.pdf) — compiled report skeleton for preview.
-
-## Assessment notebooks
-
-- [`notebooks/01_bloch2d_validation.ipynb`](notebooks/01_bloch2d_validation.ipynb) — executed PhysKit checkerboard-band, effective-mass, 2D DOS, and intrinsic sheet-statistics validation.
-- [`notebooks/02_intrinsic_effmass.ipynb`](notebooks/02_intrinsic_effmass.ipynb) — executable Part II skeleton for the 3D intrinsic model and silicon control.
-- [`notebooks/03_material_analysis.ipynb`](notebooks/03_material_analysis.ipynb) — executable Part III declaration, provenance, comparison, and sensitivity skeleton.
-- [`notebooks/04_doping_analysis.ipynb`](notebooks/04_doping_analysis.ipynb) — executable Part IV incomplete-ionization and doping-sweep skeleton.
-
-Supporting scaffolds are in `src/`, `tests/`, `data/`, and `figures/`. Skeleton
-notebooks and skipped test cases are explicitly marked TODO and are not yet
-submission-ready.
-
-The notebooks use Python 3.14+ and the PhysKit commit pinned in
-[`requirements.txt`](requirements.txt). Create an environment with
-`python3.14 -m pip install -r requirements.txt`, then run the notebook from a
-clean kernel. With `uv`, launch one directly with:
+Start from the assessment root so notebook imports and relative paths remain
+consistent:
 
 ```bash
+cd dlsu_AY20262026T1/LA1
+python3.14 -m pip install -r requirements.txt
+pytest
+```
+
+With `uv`, launch JupyterLab from the same directory:
+
+```bash
+cd dlsu_AY20262026T1/LA1
 uv run --python 3.14 --with-requirements requirements.txt jupyter lab
 ```
+
+See the [LA1 workspace guide](dlsu_AY20262026T1/LA1/README.md) for the complete
+layout and build commands.
+
+The developing course manuscript is at the repository root in
+[`lecture-notes/`](lecture-notes/). Its opening sequence connects the particle
+in a box to Bloch states and HOMO--LUMO levels to tight-binding bands before
+introducing density of states and equilibrium carrier statistics.  Each
+published figure has a student-facing reproduction notebook identified by a
+footnote in its caption; see the
+[lecture-note workflow](lecture-notes/README.md).
+
+## Historical material
+
+Historical source material is preserved without normalization under
+[`legacy/`](legacy/).

@@ -16,5 +16,5 @@ The repository includes the compiled PDF so students can inspect the skeleton
 without a local TeX installation. Delete every red `TODO`, replace placeholder
 figures, complete citations, and update the student metadata before submission.
 
-Keep generated figures in `figures/` at repository root or adjust
+Keep generated figures in `../figures/` at the LA1 workspace root or adjust
 `\\graphicspath` in the template.

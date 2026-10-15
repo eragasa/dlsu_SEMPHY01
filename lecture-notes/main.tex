@@ -1,0 +1,27 @@
+\documentclass[11pt,oneside]{book}
+
+\input{preamble.tex}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\input{frontmatter/titlepage.tex}
+\frontmatter
+\hypersetup{pageanchor=true}
+\input{frontmatter/preface.tex}
+\tableofcontents
+
+\mainmatter
+\part{Foundations and Equilibrium}
+\input{chapters/01-particle-box-to-bloch.tex}
+\input{chapters/02-homo-lumo-tight-binding.tex}
+\input{chapters/03-spectral-density-of-states.tex}
+\input{chapters/04-statistical-mechanics-of-carriers.tex}
+\input{chapters/05-determining-chemical-potential.tex}
+\input{chapters/06-intrinsic-semiconductor.tex}
+\input{chapters/07-extrinsic-semiconductor.tex}
+
+\backmatter
+\printbibliography[heading=bibintoc,title={References}]
+
+\end{document}

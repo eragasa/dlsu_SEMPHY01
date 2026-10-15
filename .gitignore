@@ -12,6 +12,8 @@ __pycache__/
 *.aux
 *.bbl
 *.blg
+*.bcf
+*.run.xml
 *.fdb_latexmk
 *.fls
 *.log

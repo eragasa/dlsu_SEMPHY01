@@ -1,0 +1,127 @@
+\usepackage[margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{braket}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage[backend=biber,style=numeric-comp,sorting=nyt]{biblatex}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\addbibresource{bibliography/references.bib}
+
+\definecolor{SemBlue}{HTML}{123B66}
+\definecolor{SemLightBlue}{HTML}{EEF5FB}
+\definecolor{SemGreen}{HTML}{246B4A}
+\definecolor{SemOrange}{HTML}{A44A17}
+\definecolor{CodeBackground}{HTML}{F5F7FA}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=SemBlue,
+  citecolor=SemGreen,
+  urlcolor=SemOrange,
+  pdftitle={Semiconductor Physics: Models, Computation, and Validation},
+  pdfauthor={Eugene Joseph M. Ragasa}
+}
+
+\sisetup{
+  scientific-notation=true,
+  separate-uncertainty=true,
+  per-mode=symbol
+}
+
+\setlist{itemsep=0.25em,topsep=0.4em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\fancyhead[L]{\small\nouppercase{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\newtcbtheorem[number within=chapter]{definition}{Definition}{
+  enhanced,
+  breakable,
+  colback=SemLightBlue,
+  colframe=SemBlue,
+  colbacktitle=SemBlue,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=0.8pt,
+  arc=1mm,
+  before skip=0.8em,
+  after skip=0.8em
+}{def}
+
+\newtcolorbox{modelcheck}[1][]{
+  enhanced,
+  breakable,
+  colback=green!4,
+  colframe=SemGreen,
+  title={Model check},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{boundarybox}[1][]{
+  enhanced,
+  breakable,
+  colback=orange!5,
+  colframe=SemOrange,
+  title={Model boundary},
+  fonttitle=\bfseries,
+  #1
+}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{CodeBackground},
+  frame=single,
+  rulecolor=\color{black!20},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\scriptsize\color{black!55},
+  xleftmargin=2em,
+  framexleftmargin=1.5em
+}
+
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\kb}{k_{\mathrm B}}
+\newcommand{\Ec}{E_{\mathrm C}}
+\newcommand{\Ev}{E_{\mathrm V}}
+\newcommand{\Eg}{E_{\mathrm g}}
+\newcommand{\Ef}{E_{\mathrm F}}
+\newcommand{\mui}{\mu_{\mathrm i}}
+\newcommand{\Nc}{N_{\mathrm C}}
+\newcommand{\Nv}{N_{\mathrm V}}
+\newcommand{\ii}{\mathrm i}
+
+% Every published figure identifies the student-facing notebook that reproduces it.
+\newcommand{\figurenotebookmark}{\protect\footnotemark}
+\newcommand{\figurenotebooktext}[1]{%
+  \footnotetext{\textit{Student reproduction notebook:}
+    \href{run:#1}{\nolinkurl{#1}}.}%
+}

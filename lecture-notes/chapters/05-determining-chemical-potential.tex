@@ -1,0 +1,371 @@
+\chapter{Determining the Chemical Potential from the Available States}
+\label{ch:determining-chemical-potential}
+
+An energy band specifies the available one-particle states and their energies.
+The partition function gives their occupations for a trial chemical potential.
+Particle-number conservation or charge neutrality selects the physical value of
+$\mu$.
+
+This chapter develops the general constrained problem before specializing to
+intrinsic and extrinsic semiconductors.  The central equation is either a fixed
+particle-number condition,
+\begin{equation}
+  N(\mu,T)=N_{\mathrm{target}},
+  \label{eq:general-fixed-particle-constraint}
+\end{equation}
+or a fixed-charge condition,
+\begin{equation}
+  Q(\mu,T)=Q_{\mathrm{target}}.
+  \label{eq:general-fixed-charge-constraint}
+\end{equation}
+The chemical potential is the value that satisfies the declared constraint.
+
+\section{Thermodynamic inputs beyond the band structure}
+
+Consider two samples made from the same semiconductor.  If their crystal
+structures and temperatures are equal, they can have essentially the same host
+bands $E_n(\bm k)$ and density of states $g(E)$.  If one sample is donor doped
+and the other acceptor doped, their equilibrium chemical potentials are
+different.  Their total-charge constraints and dopant charge states select the
+different values of $\mu$.
+
+Even in an undoped material, temperature matters.  The same fixed electron
+number is distributed more broadly in energy as $T$ increases, and $\mu(T)$ can
+move to preserve that number.  A chemical-potential calculation therefore specifies the temperature, the
+conserved particle number or charge, the included states and degeneracies, and a
+common energy reference for bands, localized levels, and $\mu$.
+
+\begin{boundarybox}
+Band energies determine the possible occupations.  Temperature determines how
+sharply those occupations change with energy.  Particle number or charge
+neutrality determines which chemical potential is realized.
+\end{boundarybox}
+
+\section{The finite discrete-state problem}
+
+Begin with discrete one-particle energies $E_i$ and multiplicities $g_i$.  At
+thermal equilibrium, the expected electron number is
+\begin{equation}
+  \boxed{
+  N(\mu,T)
+  =\sum_i g_i
+   \frac{1}{1+\exp[(E_i-\mu)/(\kb T)]}.
+  }
+  \label{eq:discrete-electron-number-constraint}
+\end{equation}
+The multiplicity $g_i$ counts how many distinct one-particle states have energy
+$E_i$; the Fermi--Dirac factor gives the occupied fraction of those states.
+The equation
+\begin{equation}
+  N(\mu,T)=N_{\mathrm{target}}
+  \label{eq:discrete-chemical-potential-equation}
+\end{equation}
+then determines $\mu$.
+
+The left side is monotonic.  Differentiating one occupation gives
+\begin{equation}
+\begin{aligned}
+  \frac{\partial f_i}{\partial\mu}
+  &=\beta
+    \frac{e^{\beta(E_i-\mu)}}
+         {[1+e^{\beta(E_i-\mu)}]^2}\\
+  &=\beta f_i(1-f_i)>0.
+\end{aligned}
+  \label{eq:fermi-occupation-mu-derivative}
+\end{equation}
+Therefore
+\begin{equation}
+  \frac{\partial N}{\partial\mu}
+  =\beta\sum_i g_i f_i(1-f_i)>0
+  \label{eq:discrete-particle-number-monotonicity}
+\end{equation}
+whenever at least one state is partially occupied.  Raising $\mu$ always raises
+the expected particle number.  This monotonicity normally makes the solution
+unique.
+
+\subsection{Zero-temperature limit}
+
+As $T\rightarrow0$,
+\begin{equation}
+  f(E,\mu,0)
+  =\begin{cases}
+      1, & E<\mu,\\
+      0, & E>\mu.
+    \end{cases}
+  \label{eq:zero-temperature-step-occupation}
+\end{equation}
+States are filled from lowest energy upward.  For a partially filled level,
+$\mu$ coincides with that level in the limiting description.  If an integer
+number of complete levels is filled and a gap follows, any $\mu$ inside that
+gap produces the same zero-temperature occupations.  The finite-temperature
+limit or a thermodynamic convention selects a particular limiting value.
+
+A semiconductor chemical potential can lie inside the band gap between the
+allowed one-particle states.  It remains the parameter controlling the relative
+statistical cost of adding or removing an electron.
+
+\subsection{A symmetric two-level example}
+
+Let a spinless particle occupy one of two levels,
+\begin{equation}
+  E_-=E_0-\frac{\Delta}{2},
+  \qquad
+  E_+=E_0+\frac{\Delta}{2},
+  \label{eq:symmetric-two-level-energies}
+\end{equation}
+and require one expected particle:
+\begin{equation}
+  f(E_-,\mu,T)+f(E_+,\mu,T)=1.
+  \label{eq:symmetric-two-level-number-constraint}
+\end{equation}
+Using
+\begin{equation}
+  f(E_0-\epsilon,E_0,T)
+  =1-f(E_0+\epsilon,E_0,T),
+  \label{eq:fermi-symmetry-about-mu}
+\end{equation}
+the constraint gives
+\begin{equation}
+  \boxed{\mu=E_0}
+  \label{eq:symmetric-two-level-chemical-potential}
+\end{equation}
+for every $T$.  Spectral and particle--hole symmetry place the chemical
+potential at the arithmetic mean in this example.
+
+\section{The continuum limit for energy bands}
+
+For a macroscopic solid, the discrete sum becomes a density-of-states integral.
+If all relevant electronic bands are included,
+\begin{equation}
+  \boxed{
+  \frac{N(\mu,T)}{V}
+  =\sum_n\int g_n(E)f(E,\mu,T)\,\dd E.
+  }
+  \label{eq:continuum-total-electron-number}
+\end{equation}
+The prescribed total electron density determines $\mu$ through
+\begin{equation}
+  \sum_n\int g_n(E)f(E,\mu,T)\,\dd E
+  =\frac{N_{\mathrm{target}}}{V}.
+  \label{eq:continuum-electron-number-closure}
+\end{equation}
+
+This expression is exact for the declared independent-particle band model, but
+it can be inconvenient for a semiconductor.  The total includes the enormous
+population of occupied valence states and perhaps deeper core states, while the
+quantities of interest are often the much smaller deviations from a neutral
+reference.  Subtracting two large numbers to find a small carrier imbalance is
+also numerically fragile.
+
+The electron--hole description reorganizes the same counting around a neutral
+reference.  Conduction electrons are occupied states above $E_C$:
+\begin{equation}
+  n(\mu,T)
+  =\int_{E_C}^{\infty}g_c(E)f(E,\mu,T)\,\dd E.
+  \label{eq:chemical-potential-conduction-electrons}
+\end{equation}
+Valence holes are missing electrons below $E_V$:
+\begin{equation}
+  p(\mu,T)
+  =\int_{-\infty}^{E_V}g_v(E)[1-f(E,\mu,T)]\,\dd E.
+  \label{eq:chemical-potential-valence-holes}
+\end{equation}
+The fixed positive charge of the host lattice is already incorporated in the
+neutral reference.  The remaining constraint can then be written directly in
+terms of the mobile carrier and dopant deviations.
+
+\section{Charge neutrality as the semiconductor constraint}
+
+For a uniform semiconductor containing singly charged donors and acceptors,
+\begin{equation}
+  \rho(\mu,T)
+  =q\left[p+N_D^+-n-N_A^-\right].
+  \label{eq:chemical-potential-charge-density}
+\end{equation}
+Bulk neutrality requires
+\begin{equation}
+  \boxed{
+  n(\mu,T)+N_A^-(\mu,T)
+  =p(\mu,T)+N_D^+(\mu,T).
+  }
+  \label{eq:chemical-potential-neutrality-closure}
+\end{equation}
+This one equation combines four statistical populations that depend on the
+same chemical potential.
+
+Define the neutrality residual
+\begin{equation}
+  R(\mu)
+  =n(\mu,T)+N_A^-(\mu,T)
+   -p(\mu,T)-N_D^+(\mu,T).
+  \label{eq:chemical-potential-neutrality-residual}
+\end{equation}
+The equilibrium solution satisfies
+\begin{equation}
+  R(\mu)=0.
+  \label{eq:chemical-potential-root-equation}
+\end{equation}
+Increasing $\mu$ raises the conduction-electron population and the negatively
+charged acceptor population.  It lowers the valence-hole population and the
+positively charged donor population.  Every change raises $R(\mu)$ under the
+independent-state model.
+Consequently the root is monotonic and normally unique.
+
+\section{Intrinsic material as the first closure problem}
+
+An ideal intrinsic semiconductor contains no charged dopants:
+\begin{equation}
+  N_D^+=N_A^-=0.
+  \label{eq:no-ionized-dopants-intrinsic}
+\end{equation}
+Neutrality reduces to
+\begin{equation}
+  n(\mui,T)=p(\mui,T).
+  \label{eq:chemical-potential-intrinsic-neutrality}
+\end{equation}
+The intrinsic chemical potential $\mui$ is the value at which the statistically
+expected conduction-electron and valence-hole populations are equal.  Equal
+conduction and valence state counts place it at midgap; unequal state counts
+displace it toward the band with fewer thermally accessible states.
+
+Under nondegenerate parabolic-band conditions,
+\begin{align}
+  n&=N_Ce^{-(E_C-\mu)/(\kb T)},
+  \label{eq:chemical-potential-boltzmann-electrons}\\
+  p&=N_Ve^{-(\mu-E_V)/(\kb T)}.
+  \label{eq:chemical-potential-boltzmann-holes}
+\end{align}
+Equating them gives
+\begin{equation}
+  \mui
+  =\frac{E_C+E_V}{2}
+   +\frac{\kb T}{2}\ln\left(\frac{N_V}{N_C}\right).
+  \label{eq:chemical-potential-intrinsic-result-preview}
+\end{equation}
+The following intrinsic-semiconductor chapter derives and interprets each term.
+
+\section{Energy references must be shared}
+
+Equilibrium occupations depend on energy differences such as $E-\mu$,
+$E_C-\mu$, and $E_D-\mu$.  If every electronic energy is shifted by one
+constant $C$,
+\begin{equation}
+  E' = E+C,
+  \qquad
+  \mu'=\mu+C,
+  \label{eq:chemical-potential-rigid-energy-shift}
+\end{equation}
+then
+\begin{equation}
+  E'-\mu'=E-\mu
+  \label{eq:chemical-potential-energy-difference-invariance}
+\end{equation}
+and all populations remain unchanged.
+
+Conduction bands, valence bands, localized levels, and $\mu$ require one aligned
+energy reference.  Explicit offsets connect conventions based on the vacuum
+level, valence-band maximum, average electrostatic potential, or a numerical
+energy zero.
+
+\section{Choosing the statistical and band model}
+
+The physical regime determines the band and occupation models used in the
+closing equation.
+
+\subsection{Nondegenerate or Fermi--Dirac statistics}
+
+If $\mu$ lies several $\kb T$ from a band edge, the Boltzmann approximation can
+be checked against the full Fermi integral.  If $\mu$ approaches or enters a
+band, the full Fermi--Dirac occupation is required.  Using a Boltzmann formula
+to calculate a chemical potential and then finding that the result lies inside
+the band is a failed self-consistency check.
+
+\subsection{Parabolic or full bands}
+
+Near a band edge, effective masses and analytic densities of states may be
+adequate.  If thermal occupation samples nonparabolic regions, multiple remote
+valleys, or narrow bands, the carrier integrals must use a more complete
+$g(E)$ calculated from the bands.
+
+\subsection{Complete or incomplete dopant ionization}
+
+The replacements $N_D^+=N_D$ and $N_A^-=N_A$ are regime-dependent
+approximations.  At low temperature or for deeper levels, localized-state
+partition functions must be included in the same neutrality equation.
+
+\subsection{Fixed bands or charge-dependent bands}
+
+At high carrier or impurity concentration, screening, exchange, band-gap
+narrowing, and impurity-band formation can make the bands themselves depend on
+the solution.  The problem is then self-consistent at two levels: occupations
+determine charge, and charge modifies the available states.
+
+\section{Spatially varying systems}
+
+A single bulk chemical potential can describe thermal equilibrium, but the
+local band edges can vary with electrostatic potential:
+\begin{equation}
+  E_C(\bm r)=E_C^{(0)}-q\phi(\bm r),
+  \qquad
+  E_V(\bm r)=E_V^{(0)}-q\phi(\bm r).
+  \label{eq:local-band-edges-electrostatic-potential}
+\end{equation}
+The local carrier populations then depend on $\mu-E_C(\bm r)$ and
+$E_V(\bm r)-\mu$.  Their charge density enters Poisson's equation,
+\begin{equation}
+  -\nabla\cdot[\varepsilon(\bm r)\nabla\phi(\bm r)]
+  =\rho[\phi(\bm r),\mu,T].
+  \label{eq:chemical-potential-poisson-closure}
+\end{equation}
+The equilibrium calculation must solve the occupation and electrostatic
+problems together.  Imposing local neutrality would remove the space charge
+that creates depletion regions and built-in fields.
+
+Outside equilibrium, electron and hole quasi-Fermi levels describe carrier
+populations driven by generation, recombination, injection, or external fields.
+A single chemical potential describes thermal equilibrium.
+
+\section{A reliable mathematical solution procedure}
+
+For a uniform equilibrium problem, all populations are expressed as functions
+of one trial $\mu$ and combined into the residual $R(\mu)$.  The calculation
+uses one energy reference, a specified temperature and dimensionality, a
+normalized DOS with declared degeneracies, and a complete account of the
+conserved particle number or charge.  The selected occupation laws state their
+physical regime.  Opposite residual signs at two trial chemical potentials
+form a bracket containing the root.
+
+The final value is substituted into the original number or charge equation.
+Energy-shift invariance checks the alignment convention, while refinement of
+the band integrals checks numerical convergence.  The returned $\mu$ must lie
+inside the physical regime of every approximation used to construct the
+populations.
+
+The bracket is physically interpretable.  Far below all relevant electronic
+states, the system lacks electrons and is positively charged relative to the
+target.  Far above them, the states fill and the system becomes negatively
+charged.  The equilibrium chemical potential lies between these limiting charge
+states.
+
+\section{Physical closure}
+
+The one-electron spectrum and its spectral multiplicities define the normalized
+density of states.  The partition function defines the many-electron occupation
+of those states.  Valence vacancies define holes relative to the neutral ionic
+background, while localized dopant partition sums define additional charge
+states.  A specified temperature and a conserved particle number or charge then
+produce one closing equation for $\mu$ on the common energy scale.
+
+\section{Chapter summary}
+
+The chemical potential follows from a band spectrum together with thermodynamic
+information.  Bands and their multiplicities determine the available states;
+the partition function determines their expected occupation
+for a trial $\mu$; and particle-number conservation or charge neutrality
+selects the physical value.  In semiconductors, electron--hole notation recasts
+the total-electron problem relative to a neutral filled-valence reference and
+avoids subtracting enormous nearly equal charges.  Exact bands, parabolic
+reductions, Fermi integrals, Boltzmann limits, and dopant-ionization
+approximations are alternative models for the same constrained calculation.
+The following chapters apply this framework first to intrinsic material and
+then to extrinsic material.

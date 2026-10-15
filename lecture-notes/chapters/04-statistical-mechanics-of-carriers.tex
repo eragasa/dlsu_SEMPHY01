@@ -1,0 +1,780 @@
+\chapter{Statistical Mechanics of Carrier Populations}
+\label{ch:statistical-mechanics-carriers}
+
+The preceding chapter determined the one-particle states available at each
+energy.  A carrier calculation also requires the equilibrium occupation
+probability of every state.  The partition function and the macroscopic
+constraints determine that probability.
+
+The purpose of this chapter is to derive the sequence
+\begin{equation}
+  \text{microstates}
+  \longrightarrow
+  \text{partition function}
+  \longrightarrow
+  \text{occupation}
+  \longrightarrow
+  n,p
+  \longrightarrow
+  \text{charge neutrality}
+  \longrightarrow
+  \mu.
+  \label{eq:statistical-mechanics-carrier-sequence}
+\end{equation}
+This provides the statistical foundation for the intrinsic and extrinsic
+semiconductors treated in the following chapters
+\cite{kittel2005,szeLee2012,szeNg2007,rudan2015}.
+
+\section{From equipartition to a probability distribution}
+
+A familiar starting point in thermal physics is the equipartition theorem.  In
+the classical regime, every independent quadratic term in the energy has mean
+value
+\begin{equation}
+  \left\langle a x^2\right\rangle
+  =\frac12\kb T.
+  \label{eq:classical-equipartition-quadratic-term}
+\end{equation}
+A free particle has three quadratic translational contributions,
+\begin{equation}
+  E_{\mathrm{kin}}
+  =\frac{p_x^2}{2m}
+   +\frac{p_y^2}{2m}
+   +\frac{p_z^2}{2m},
+  \label{eq:three-dimensional-classical-kinetic-energy}
+\end{equation}
+so
+\begin{equation}
+  \langle E_{\mathrm{kin}}\rangle
+  =\frac32\kb T.
+  \label{eq:classical-translational-equipartition}
+\end{equation}
+This gives an intuitive meaning to temperature: thermal energy is distributed
+among accessible degrees of freedom.
+
+Equipartition applies to classical continuous quadratic degrees of freedom.  A
+band gap is a finite quantum excitation energy, and a degree of freedom becomes
+thermally frozen when its energy spacing exceeds $\kb T$.  Semiconductor carrier
+populations therefore require state probabilities for one electron and mean
+state occupations for many electrons.
+
+The partition function assigns equilibrium probabilities to microscopic states
+with different energies.  Its classical quadratic limit reproduces
+equipartition.
+
+\section{Microstates, macrostates, and constraints}
+
+A \emph{microstate} specifies the complete microscopic state of the system.
+For one electron in a crystal, a microstate is one particular band state,
+which may be labeled by band index, wave vector, and spin:
+\begin{equation}
+  \alpha=(n,\bm k,s),
+  \qquad E_\alpha=E_{ns}(\bm k).
+  \label{eq:single-electron-band-state-label}
+\end{equation}
+The band calculation supplies this list of one-electron energies.  A canonical
+partition function describes one electron on that spectrum; a many-electron
+occupation law is introduced separately.
+
+A \emph{macrostate} specifies macroscopic constraints such as temperature,
+volume, and total charge.  Statistical mechanics assigns probabilities to the
+microstates compatible with those constraints.
+
+The permitted exchanges determine the equilibrium distribution.  An isolated
+system has fixed energy and particle number.  A canonical system exchanges
+energy with a reservoir at fixed particle number.  A grand-canonical system
+exchanges energy and particles and is specified by $T$, $V$, and chemical
+potential $\mu$.
+
+A one-electron band and a many-electron population are different levels of
+description.  The canonical partition function describes one electron
+thermally distributed over the one-electron states.  Fermi--Dirac statistics
+describes many electrons distributed over that same list of states.
+The grand-canonical description then assigns a mean occupation to each
+one-electron state, while the chemical potential is adjusted so that the total
+expectation obeys the specimen's fixed charge.
+
+\section{From reservoir multiplicity to the partition function}
+
+Consider a small system in thermal contact with a much larger reservoir.  The
+combined system is isolated with fixed energy $E_{\mathrm{tot}}$.  If the small
+system occupies microstate $s$ with energy $E_s$, the reservoir has energy
+\begin{equation}
+  E_R=E_{\mathrm{tot}}-E_s.
+  \label{eq:reservoir-energy-after-system-state}
+\end{equation}
+Let $\Omega_R(E_R)$ be the number of reservoir microstates available at that
+energy.  Every combined microstate is equally probable, so the probability of
+small-system state $s$ is proportional to the reservoir multiplicity:
+\begin{equation}
+  \mathbb P_s\propto
+  \Omega_R(E_{\mathrm{tot}}-E_s).
+  \label{eq:system-probability-from-reservoir-multiplicity}
+\end{equation}
+
+Because the reservoir is large and $E_s\ll E_{\mathrm{tot}}$, expand the
+logarithm of its multiplicity:
+\begin{equation}
+\begin{aligned}
+  \ln\Omega_R(E_{\mathrm{tot}}-E_s)
+  \simeq{}&\ln\Omega_R(E_{\mathrm{tot}})\\
+  &-E_s
+  \left.
+  \frac{\partial\ln\Omega_R}{\partial E_R}
+  \right|_{E_{\mathrm{tot}}}.
+\end{aligned}
+  \label{eq:reservoir-log-multiplicity-expansion}
+\end{equation}
+Use Boltzmann's entropy relation
+\begin{equation}
+  S_R=\kb\ln\Omega_R
+  \label{eq:boltzmann-entropy-multiplicity}
+\end{equation}
+and the thermodynamic definition
+\begin{equation}
+  \frac{1}{T}
+  =\left(\frac{\partial S_R}{\partial E_R}\right)_{V,N}.
+  \label{eq:temperature-entropy-derivative}
+\end{equation}
+Then
+\begin{equation}
+  \frac{\partial\ln\Omega_R}{\partial E_R}
+  =\frac{1}{\kb T}
+  \equiv\beta.
+  \label{eq:beta-from-reservoir-multiplicity}
+\end{equation}
+Exponentiating \cref{eq:reservoir-log-multiplicity-expansion} gives
+\begin{equation}
+  \Omega_R(E_{\mathrm{tot}}-E_s)
+  \propto e^{-\beta E_s}.
+  \label{eq:boltzmann-weight-from-reservoir}
+\end{equation}
+The Boltzmann factor therefore follows from the multiplicity of the reservoir.
+
+For a system with fixed particle number whose microstates have energies $E_s$,
+normalization gives the canonical probability
+\begin{equation}
+  \mathbb P_s
+  =\frac{e^{-\beta E_s}}{Z},
+  \qquad
+  \beta=\frac{1}{\kb T},
+  \label{eq:canonical-state-probability}
+\end{equation}
+where
+\begin{equation}
+  \boxed{
+  Z(T,V,N)=\sum_s e^{-\beta E_s}
+  }
+  \label{eq:canonical-partition-function}
+\end{equation}
+is the canonical partition function.  The normalization follows immediately:
+\begin{equation}
+  \sum_s\mathbb P_s
+  =\frac{1}{Z}\sum_s e^{-\beta E_s}=1.
+  \label{eq:canonical-probability-normalization}
+\end{equation}
+
+For any observable $A$ with value $A_s$ in microstate $s$, the equilibrium
+expectation is
+\begin{equation}
+  \langle A\rangle
+  =\sum_s A_s\mathbb P_s.
+  \label{eq:canonical-observable-expectation}
+\end{equation}
+In particular,
+\begin{equation}
+\begin{aligned}
+  \langle E\rangle
+  &=\frac{1}{Z}\sum_sE_se^{-\beta E_s}\\
+  &=-\frac{\partial\ln Z}{\partial\beta}.
+\end{aligned}
+  \label{eq:canonical-mean-energy}
+\end{equation}
+The Helmholtz free energy is
+\begin{equation}
+  F=-\kb T\ln Z.
+  \label{eq:helmholtz-from-partition-function}
+\end{equation}
+The partition function normalizes the state probabilities, and its derivatives
+generate equilibrium thermodynamic quantities.
+
+\subsection{Recovering equipartition from the partition function}
+
+For one classical quadratic coordinate with energy
+\begin{equation}
+  E(x)=ax^2,
+  \qquad a>0,
+  \label{eq:one-quadratic-coordinate-energy}
+\end{equation}
+the continuous canonical partition integral is
+\begin{equation}
+\begin{aligned}
+  Z_x
+  &=\int_{-\infty}^{\infty}e^{-\beta ax^2}\,\dd x\\
+  &=\sqrt{\frac{\pi}{\beta a}}.
+\end{aligned}
+  \label{eq:gaussian-quadratic-partition-integral}
+\end{equation}
+Its mean energy is
+\begin{equation}
+\begin{aligned}
+  \langle ax^2\rangle
+  &=-\frac{\partial\ln Z_x}{\partial\beta}\\
+  &=-\frac{\partial}{\partial\beta}
+    \left[
+      \frac12\ln\pi-\frac12\ln\beta-\frac12\ln a
+    \right]\\
+  &=\frac{1}{2\beta}
+  =\frac12\kb T.
+\end{aligned}
+  \label{eq:equipartition-from-partition-function}
+\end{equation}
+Thus the partition function reproduces equipartition when the energy is
+classical, continuous, and quadratic.  Unlike equipartition, the partition
+function also applies to discrete and quantum spectra, which is why it is the
+appropriate starting point for electronic occupations.
+
+\subsection{Two-state canonical example}
+
+Let a fixed particle occupy either a ground state of energy $0$ or an excited
+state of energy $\Delta$.  Then
+\begin{equation}
+  Z=1+e^{-\beta\Delta}.
+  \label{eq:two-state-canonical-partition}
+\end{equation}
+The excited-state probability is
+\begin{equation}
+  \mathbb P_{\mathrm{exc}}
+  =\frac{e^{-\beta\Delta}}{1+e^{-\beta\Delta}}.
+  \label{eq:two-state-excited-probability}
+\end{equation}
+At low temperature, $\beta\Delta\gg1$ and the excitation is rare.  At high
+temperature, the two states approach equal probability.  This elementary
+example already contains the central logic: enumerate microstates, assign
+Boltzmann weights, sum them to form $Z$, and normalize.
+
+\section{One electron distributed over a band}
+
+Let $E_\alpha$ be the one-electron energies obtained from a band calculation.
+For exactly one electron in thermal equilibrium, the canonical partition
+function is
+\begin{equation}
+  Z_1=\sum_\alpha e^{-\beta E_\alpha}.
+  \label{eq:single-electron-band-partition-function}
+\end{equation}
+If the distinct energies $E_j$ have multiplicities $M_j$, the same sum is
+\begin{equation}
+  Z_1=\sum_jM_je^{-\beta E_j}.
+  \label{eq:single-electron-partition-with-multiplicity}
+\end{equation}
+The probability that the electron occupies one particular state $\alpha$ is
+\begin{equation}
+  \mathbb P_\alpha
+  =\frac{e^{-\beta E_\alpha}}{Z_1},
+  \label{eq:single-electron-canonical-state-probability}
+\end{equation}
+and the probability that its energy is $E_j$ is
+\begin{equation}
+  \mathbb P(E_j)
+  =\frac{M_je^{-\beta E_j}}{Z_1}.
+  \label{eq:single-electron-energy-probability-multiplicity}
+\end{equation}
+The factor $M_j$ arises because any one of $M_j$ distinct states gives the same
+energy.  This one-electron calculation uses the canonical Boltzmann weights directly.
+
+In a macroscopic band, the sum becomes
+\begin{equation}
+  Z_1
+  =\mathcal V_d\int g(E)e^{-\beta E}\,\dd E,
+  \label{eq:single-electron-partition-dos-integral}
+\end{equation}
+where $g(E)$ is the one-electron density of states per physical size.  This
+equation connects the discrete multiplicities of the preceding chapter to the
+canonical statistics of one electron.
+
+\section{Many electrons and the chemical potential}
+
+If a microstate can contain different particle numbers $N_s$, the reservoir
+must account for both energy and particles.  The statistical weight becomes
+\begin{equation}
+  e^{-\beta(E_s-\mu N_s)}.
+  \label{eq:grand-canonical-weight}
+\end{equation}
+The grand partition function is
+\begin{equation}
+  \boxed{
+  \Xi(T,V,\mu)
+  =\sum_s e^{-\beta(E_s-\mu N_s)}.
+  }
+  \label{eq:grand-partition-function}
+\end{equation}
+The probability of microstate $s$ is
+\begin{equation}
+  \mathbb P_s
+  =\frac{e^{-\beta(E_s-\mu N_s)}}{\Xi}.
+  \label{eq:grand-canonical-probability}
+\end{equation}
+
+The factor $-\mu N_s$ controls the statistical cost of changing particle
+number.  Adding a particle with energy $E$ changes the exponent by
+\begin{equation}
+  -\beta(E-\mu).
+  \label{eq:add-particle-grand-energy}
+\end{equation}
+A state far above $\mu$ is expensive to occupy, while a state far below $\mu$
+is strongly favored.
+
+The grand potential is
+\begin{equation}
+  \Omega=-\kb T\ln\Xi,
+  \label{eq:grand-potential}
+\end{equation}
+and the expected particle number follows from
+\begin{equation}
+  \boxed{
+  \langle N\rangle
+  =\frac{1}{\beta}
+   \frac{\partial\ln\Xi}{\partial\mu}.
+  }
+  \label{eq:particle-number-from-grand-partition}
+\end{equation}
+To verify the sign and factor, differentiate directly:
+\begin{equation}
+\begin{aligned}
+  \frac{\partial\ln\Xi}{\partial\mu}
+  &=\frac{1}{\Xi}
+    \sum_s\beta N_s e^{-\beta(E_s-\mu N_s)}\\
+  &=\beta\langle N\rangle.
+\end{aligned}
+  \label{eq:grand-particle-derivative}
+\end{equation}
+
+The fundamental thermodynamic relation for one particle species is
+\begin{equation}
+  \dd U=T\,\dd S-P\,\dd V+\mu\,\dd N.
+  \label{eq:fundamental-relation-with-chemical-potential}
+\end{equation}
+Therefore
+\begin{equation}
+  \mu
+  =\left(\frac{\partial U}{\partial N}\right)_{S,V}.
+  \label{eq:chemical-potential-internal-energy-derivative}
+\end{equation}
+For the Helmholtz free energy $F=U-TS$,
+\begin{equation}
+  \dd F=-S\,\dd T-P\,\dd V+\mu\,\dd N,
+  \label{eq:helmholtz-differential-chemical-potential}
+\end{equation}
+so the form used at fixed temperature is
+\begin{equation}
+  \boxed{
+  \mu
+  =\left(\frac{\partial F}{\partial N}\right)_{T,V}.
+  }
+  \label{eq:chemical-potential-free-energy-derivative}
+\end{equation}
+
+\begin{definition}{Chemical potential}{chemical-potential-statistical}
+The chemical potential $\mu$ is the change in the appropriate thermodynamic
+energy when the particle number changes while the natural external variables
+are held fixed.  It is the variable conjugate to particle number.  In the
+grand-canonical weight, $E-\mu$ is the statistical cost of placing an electron
+in a one-electron state of energy $E$.
+\end{definition}
+
+The derivative is understood in the thermodynamic limit, where changing $N$ by
+one is represented by a continuous derivative.  In a semiconductor, charge
+neutrality or a prescribed total electron number fixes the value of $\mu$.
+
+\begin{definition}{Fermi level}{fermi-level-definition}
+At thermal equilibrium, the Fermi level is the semiconductor-physics name for
+the electronic chemical potential $\mu(T)$.  For a nondegenerate spin-resolved
+state governed by the Fermi--Dirac occupation,
+\begin{equation}
+  f(E=\mu,T)=\frac12.
+  \label{eq:fermi-level-half-occupation-definition}
+\end{equation}
+The Fermi level can lie in a band gap, where no one-electron state exists.
+\end{definition}
+
+\begin{definition}{Fermi energy}{fermi-energy-definition}
+The Fermi energy is the zero-temperature electronic chemical potential:
+\begin{equation}
+  \boxed{E_F=\mu(T=0).}
+  \label{eq:fermi-energy-zero-temperature-definition}
+\end{equation}
+For a noninteracting metal with a partially filled band, it is the boundary
+between occupied and empty one-electron states at zero temperature.
+\end{definition}
+
+In a gapped system, the zero-temperature particle number can remain unchanged
+while $\mu$ moves within an interval containing no states.  The chemical-
+potential definition remains primary; the phrase ``highest occupied energy''
+is a special metallic interpretation of $E_F$.  Some semiconductor texts use
+\emph{Fermi energy} and \emph{Fermi level} interchangeably at finite
+temperature.  This manuscript reserves $E_F$ for the zero-temperature quantity
+and uses $\mu(T)$ for the finite-temperature chemical potential.
+
+\section{Mean occupation of one spin-resolved band state}
+
+A semiconductor contains many electrons even when its bands are calculated
+from an effective one-electron Hamiltonian.  The independent-quasiparticle
+model treats the resulting band states as available one-electron orbitals and
+constructs many-electron configurations by assigning occupations to them.
+The effective band model incorporates its selected interaction effects into the
+one-electron energies.  The independent-quasiparticle treatment then assigns
+occupations while omitting residual correlations.
+
+\begin{boundarybox}
+The canonical distribution gives the state probabilities of one electron.
+Fermi--Dirac statistics gives the mean occupations when many independent
+fermionic quasiparticles fill the same one-electron spectrum.  The one-electron
+energies and the many-electron occupation law are separate assumptions.
+\end{boundarybox}
+
+For one complete spin-resolved state of energy $E$, fermionic antisymmetry
+permits two occupation possibilities:
+\begin{center}
+  \begin{tabular}{ccc}
+    \toprule
+    Occupation $n$ & Energy & Particle number \\
+    \midrule
+    $0$ & $0$ & $0$ \\
+    $1$ & $E$ & $1$ \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+Their grand-canonical weights are
+\begin{equation}
+  w_0=1,
+  \qquad
+  w_1=e^{-\beta(E-\mu)}.
+  \label{eq:single-state-grand-weights}
+\end{equation}
+The single-state grand partition function is
+\begin{equation}
+  \Xi_E=1+e^{-\beta(E-\mu)}.
+  \label{eq:single-state-grand-partition-statmech}
+\end{equation}
+The expected occupation is
+\begin{equation}
+\begin{aligned}
+  \langle n_E\rangle
+  &=0\frac{w_0}{\Xi_E}+1\frac{w_1}{\Xi_E}\\
+  &=\frac{e^{-\beta(E-\mu)}}
+          {1+e^{-\beta(E-\mu)}}\\
+  &=\frac{1}{1+e^{\beta(E-\mu)}}.
+\end{aligned}
+  \label{eq:fermi-dirac-from-partition-function}
+\end{equation}
+Thus
+\begin{equation}
+  \boxed{
+  f(E,\mu,T)
+  =\frac{1}{1+\exp[(E-\mu)/(\kb T)]}.
+  }
+  \label{eq:fermi-dirac-statistical-derivation}
+\end{equation}
+The plus sign in the denominator follows from the two mutually exclusive
+occupations $n=0$ and $n=1$.  This restriction belongs to the many-electron filling of the one-electron
+spectrum.  The band $E_n(\bm k)$ and its density of states are calculated at the
+one-electron level.
+
+The probability that the state is empty is
+\begin{equation}
+\begin{aligned}
+  1-f(E,\mu,T)
+  &=\frac{1}{1+\exp[(\mu-E)/(\kb T)]}.
+\end{aligned}
+  \label{eq:empty-fermion-state-probability-statmech}
+\end{equation}
+This vacancy probability will become the hole occupation in a valence band.
+
+Three limits provide immediate checks:
+\begin{align}
+  E=\mu&:\quad f=\frac12,
+  \label{eq:statmech-half-occupation}\\
+  E-\mu\gg\kb T&:\quad f\rightarrow0,
+  \label{eq:statmech-empty-high-state}\\
+  \mu-E\gg\kb T&:\quad f\rightarrow1.
+  \label{eq:statmech-filled-low-state}
+\end{align}
+The statement $f=1/2$ at $E=\mu$ applies to one nondegenerate band state.  A
+localized donor or acceptor with unequal charge-state degeneracies acquires an
+additional statistical factor, as shown later.
+
+\section{Many independent fermionic states}
+
+Let the one-particle energies be $E_i$.  A many-electron microstate is specified
+by occupations $n_i\in\{0,1\}$, with
+\begin{equation}
+  E_s=\sum_i n_iE_i,
+  \qquad
+  N_s=\sum_i n_i.
+  \label{eq:independent-fermion-microstate-energy-number}
+\end{equation}
+The grand partition function is
+\begin{equation}
+\begin{aligned}
+  \Xi
+  &=\sum_{\{n_i\}}
+    \exp\left[-\beta\sum_i n_i(E_i-\mu)\right]\\
+  &=\sum_{\{n_i\}}
+    \prod_i e^{-\beta n_i(E_i-\mu)}.
+\end{aligned}
+  \label{eq:many-fermion-grand-sum}
+\end{equation}
+Because each $n_i$ can be summed independently,
+\begin{equation}
+\begin{aligned}
+  \Xi
+  &=\prod_i\sum_{n_i=0}^{1}
+    e^{-\beta n_i(E_i-\mu)}\\
+  &=\boxed{
+    \prod_i\left[1+e^{-\beta(E_i-\mu)}\right]}.
+\end{aligned}
+  \label{eq:ideal-fermion-grand-partition-product}
+\end{equation}
+Taking the logarithm turns the product into a sum:
+\begin{equation}
+  \ln\Xi
+  =\sum_i\ln\left[1+e^{-\beta(E_i-\mu)}\right].
+  \label{eq:log-grand-partition-fermions}
+\end{equation}
+Using \cref{eq:particle-number-from-grand-partition},
+\begin{equation}
+\begin{aligned}
+  \langle N\rangle
+  &=\frac{1}{\beta}
+    \frac{\partial}{\partial\mu}\ln\Xi\\
+  &=\sum_i\frac{1}{1+e^{\beta(E_i-\mu)}}\\
+  &=\sum_i f(E_i,\mu,T).
+\end{aligned}
+  \label{eq:particle-number-sum-of-fermi-occupations}
+\end{equation}
+The total population is therefore a sum of single-state occupation
+probabilities.
+
+\section{From a state sum to carrier concentrations}
+
+The density of states converts the discrete state sum into an energy integral:
+\begin{equation}
+  \sum_i A(E_i)
+  \longrightarrow
+  \mathcal V_d\int g(E)A(E)\,\dd E.
+  \label{eq:state-sum-to-dos-integral}
+\end{equation}
+For conduction-band electrons in a bulk semiconductor,
+\begin{equation}
+  \boxed{
+  n(\mu,T)
+  =\int_{E_C}^{\infty}
+   g_c(E)f(E,\mu,T)\,\dd E.
+  }
+  \label{eq:statmech-electron-concentration}
+\end{equation}
+This equation has two independent ingredients:
+\begin{equation}
+  \underbrace{g_c(E)}_{\text{available states}}
+  \times
+  \underbrace{f(E,\mu,T)}_{\text{occupied fraction}}.
+  \label{eq:states-times-occupation}
+\end{equation}
+Their product is the occupied-state density per energy.
+
+A hole is a missing electron in an otherwise occupied valence band.  The
+probability that a valence state is missing its electron is $1-f$, so
+\begin{equation}
+  \boxed{
+  p(\mu,T)
+  =\int_{-\infty}^{E_V}
+   g_v(E)[1-f(E,\mu,T)]\,\dd E.
+  }
+  \label{eq:statmech-hole-concentration}
+\end{equation}
+The hole expression counts vacancies in electronic valence states.
+
+\begin{modelcheck}
+If $g(E)$ is in states per electronvolt per cubic centimetre and $\dd E$ is in
+electronvolts, then the integral gives carriers per cubic centimetre.  If the
+DOS is instead per joule per cubic metre, both the energy and spatial units must
+change together.  The occupation probability is dimensionless.
+\end{modelcheck}
+
+\section{The Boltzmann limit derived from the partition function}
+
+For a state several thermal energies above the chemical potential, define
+\begin{equation}
+  y=\frac{E-\mu}{\kb T}\gg1.
+  \label{eq:statmech-boltzmann-reduced-energy}
+\end{equation}
+Then
+\begin{equation}
+\begin{aligned}
+  f(E)
+  &=\frac{e^{-y}}{1+e^{-y}}\\
+  &\simeq e^{-y}
+  =\exp\left[-\frac{E-\mu}{\kb T}\right].
+\end{aligned}
+  \label{eq:statmech-boltzmann-tail}
+\end{equation}
+This is the low-occupation limit of the fermionic partition function.  The
+relative overestimate made by using
+$e^{-y}$ is
+\begin{equation}
+  \frac{e^{-y}-f}{f}=e^{-y}.
+  \label{eq:statmech-boltzmann-relative-error}
+\end{equation}
+At $y=3$ it is about five percent; at $y=5$ it is below one percent.
+
+Using a three-dimensional parabolic conduction-band DOS,
+\begin{equation}
+  g_c(E)=A_c\sqrt{E-E_C},
+  \label{eq:statmech-parabolic-conduction-dos}
+\end{equation}
+and the Boltzmann occupation gives
+\begin{equation}
+\begin{aligned}
+  n
+  &\simeq\int_{E_C}^{\infty}
+    A_c\sqrt{E-E_C}
+    e^{-(E-\mu)/(\kb T)}\,\dd E\\
+  &=e^{-(E_C-\mu)/(\kb T)}
+    A_c\int_0^\infty
+    \sqrt{\varepsilon}
+    e^{-\varepsilon/(\kb T)}\,\dd\varepsilon.
+\end{aligned}
+  \label{eq:statmech-boltzmann-electron-integral}
+\end{equation}
+Let $x=\varepsilon/(\kb T)$.  Then
+\begin{equation}
+\begin{aligned}
+  \int_0^\infty\sqrt{\varepsilon}
+  e^{-\varepsilon/(\kb T)}\,\dd\varepsilon
+  &=(\kb T)^{3/2}
+    \int_0^\infty x^{1/2}e^{-x}\,\dd x\\
+  &=(\kb T)^{3/2}\Gamma\left(\frac32\right)\\
+  &=(\kb T)^{3/2}\frac{\sqrt\pi}{2}.
+\end{aligned}
+  \label{eq:statmech-gamma-integral}
+\end{equation}
+Collecting the state-counting factors defines the effective conduction density
+of states $N_C$ and yields
+\begin{equation}
+  \boxed{
+  n=N_C\exp\left[-\frac{E_C-\mu}{\kb T}\right].
+  }
+  \label{eq:statmech-nondegenerate-electron-result}
+\end{equation}
+The exponential comes from the partition function; $N_C$ comes from integrating
+the band density of states.  Confusing these two origins makes the formula seem
+arbitrary.
+
+The same reasoning for valence-band vacancies gives
+\begin{equation}
+  \boxed{
+  p=N_V\exp\left[-\frac{\mu-E_V}{\kb T}\right].
+  }
+  \label{eq:statmech-nondegenerate-hole-result}
+\end{equation}
+
+\section{The chemical potential is selected by a constraint}
+
+Equations~\eqref{eq:statmech-electron-concentration} and
+\eqref{eq:statmech-hole-concentration} give populations for a trial $\mu$.
+A particle-number or charge constraint closes these population equations and
+determines $\mu$.
+
+For an intrinsic neutral semiconductor,
+\begin{equation}
+  n(\mu,T)=p(\mu,T).
+  \label{eq:statmech-intrinsic-neutrality}
+\end{equation}
+For a uniform semiconductor with ionized donors and acceptors,
+\begin{equation}
+  n(\mu,T)+N_A^-(\mu,T)
+  =p(\mu,T)+N_D^+(\mu,T).
+  \label{eq:statmech-extrinsic-neutrality}
+\end{equation}
+The equilibrium chemical potential is the value that satisfies the appropriate
+constraint.  Thus a ``Fermi-level calculation'' is fundamentally a constrained
+statistical-mechanics calculation.
+
+Under nondegenerate conditions, multiplication of
+\cref{eq:statmech-nondegenerate-electron-result,eq:statmech-nondegenerate-hole-result}
+gives
+\begin{equation}
+  np
+  =N_CN_Ve^{-(E_C-E_V)/(\kb T)}.
+  \label{eq:statmech-carrier-product}
+\end{equation}
+Defining
+\begin{equation}
+  n_i^2=N_CN_Ve^{-E_g/(\kb T)}
+  \label{eq:statmech-intrinsic-product-definition}
+\end{equation}
+produces
+\begin{equation}
+  np=n_i^2.
+  \label{eq:statmech-mass-action-law}
+\end{equation}
+The mass-action law is therefore a consequence of equilibrium, parabolic-band
+state counting, and the Boltzmann limit.  Degenerate populations require the
+full Fermi--Dirac carrier integrals.
+
+\section{Localized states and internal degeneracy}
+
+A localized dopant has a finite set of charge configurations.  The partition
+sum includes the internal degeneracy of each configuration.
+
+Suppose a donor has an ionized configuration $D^+$ with reference weight one
+and a neutral configuration $D^0$ with degeneracy ratio $g_D$.  Their weights
+are
+\begin{equation}
+  w(D^+)=1,
+  \qquad
+  w(D^0)=g_D e^{(\mu-E_D)/(\kb T)}.
+  \label{eq:statmech-donor-configuration-weights}
+\end{equation}
+Normalization gives
+\begin{equation}
+  \mathbb P(D^+)
+  =\frac{1}{1+g_De^{(\mu-E_D)/(\kb T)}}.
+  \label{eq:statmech-donor-ionized-probability}
+\end{equation}
+Therefore
+\begin{equation}
+  N_D^+=N_D\mathbb P(D^+).
+  \label{eq:statmech-ionized-donor-concentration}
+\end{equation}
+The degeneracy factor originates in the partition sum over microscopic
+configurations.  Acceptor
+statistics follow from the same procedure with their own charge states and
+degeneracies.  The extrinsic-semiconductor chapter develops both cases fully.
+
+\section{A disciplined route through a carrier calculation}
+
+A transparent equilibrium calculation begins with the bands
+$E_n(\bm k)$ and their degeneracies.  Their spectral multiplicities determine
+the densities of available states.  Partition sums for band and localized
+states determine occupation and vacancy probabilities.  Energy integration
+then gives $n$, $p$, and the charged dopant populations.  Total particle number
+or charge neutrality fixes $\mu$.  Normalization, limiting behavior, and the
+residual of the closing constraint verify the result.
+
+\section{Chapter summary}
+
+The canonical partition function normalizes Boltzmann weights for fixed particle
+number.  For one electron, it assigns probabilities directly to the
+one-electron band states.  Particle exchange in a many-electron subsystem
+introduces the grand partition
+function and the chemical potential.  Summing the empty and occupied
+configurations of each spin-resolved state produces the Fermi--Dirac mean
+occupation.  For independent states,
+the grand partition function factorizes and the expected particle number is the
+sum of those occupations.  The density of states converts that sum into the
+carrier integrals for conduction electrons and valence-band holes.  The
+Boltzmann carrier formulas follow from the low-occupation limit and the
+integrated parabolic density of states.  Finally, charge neutrality selects
+the chemical potential.  This chain is the statistical-mechanical foundation of
+all equilibrium carrier-concentration formulas used in the following chapters.
