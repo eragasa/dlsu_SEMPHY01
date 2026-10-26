@@ -1,0 +1,94 @@
+\chapter{From Langevin Dynamics to the Maxwell--Boltzmann Gas}
+\label{ch:langevin-maxwell-boltzmann}
+
+The diffusion equation resolves position after microscopic velocity memory has
+decayed.  This chapter restores velocity through the underdamped Langevin
+equation.  Thermal fluctuation and momentum relaxation produce the
+Maxwell--Boltzmann distribution.  The same dynamics becomes ballistic at short
+time and Brownian at long time.
+
+\section{Underdamped Langevin dynamics}
+
+Let a particle of mass $m$ and signed charge $q_c$ have position $\bm R$ and
+velocity $\bm V$.  A constant momentum-relaxation time $\tau$ gives
+\begin{equation}
+  \dd\bm R=\bm V\,\dd t,
+  \label{eq:thermal-gas-position}
+\end{equation}
+\begin{equation}
+  \dd\bm V
+  =-\frac{\bm V}{\tau}\,\dd t
+   +\frac{q_c}{m}\bm E\,\dd t
+   +\sqrt{\frac{2\kb T}{m\tau}}\,\dd\bm W_t.
+  \label{eq:thermal-gas-langevin}
+\end{equation}
+The damping term removes directed momentum.  The stochastic term restores the
+thermal fluctuations lost through damping.  Their coefficients satisfy the
+fluctuation--dissipation relation.
+
+With $\bm E=\bm0$, each velocity component is an Ornstein--Uhlenbeck process.
+Its stationary covariance is
+\begin{equation}
+  \left\langle V_iV_j\right\rangle
+  =\frac{\kb T}{m}\delta_{ij}.
+  \label{eq:thermal-gas-velocity-covariance}
+\end{equation}
+The associated three-dimensional velocity density is
+\begin{equation}
+  f_{\mathrm{MB}}(\bm v)
+  =\left(\frac{m}{2\pi\kb T}\right)^{3/2}
+   \exp\!\left(-\frac{m|\bm v|^2}{2\kb T}\right).
+  \label{eq:thermal-gas-maxwell-boltzmann}
+\end{equation}
+Integration over velocity direction gives the Maxwell speed density
+\begin{equation}
+  p(v)
+  =4\pi v^2
+   \left(\frac{m}{2\pi\kb T}\right)^{3/2}
+   \exp\!\left(-\frac{mv^2}{2\kb T}\right),
+  \qquad v\geq0.
+  \label{eq:thermal-gas-maxwell-speed}
+\end{equation}
+The second moment gives equipartition,
+\begin{equation}
+  \frac12m\left\langle|\bm V|^2\right\rangle
+  =\frac32\kb T.
+  \label{eq:thermal-gas-equipartition}
+\end{equation}
+The Maxwell--Boltzmann distribution therefore emerges from the same stochastic
+dynamics that produces Brownian diffusion.
+
+\section{Velocity memory and the Brownian limit}
+
+The equilibrium velocity autocorrelation in one Cartesian direction is
+\begin{equation}
+  \left\langle V(t)V(0)\right\rangle
+  =\frac{\kb T}{m}e^{-t/\tau}.
+  \label{eq:thermal-gas-velocity-autocorrelation}
+\end{equation}
+Integrating the velocity twice gives
+\begin{equation}
+  \left\langle[X(t)-X(0)]^2\right\rangle
+  =2D\left[t-\tau\left(1-e^{-t/\tau}\right)\right],
+  \label{eq:thermal-gas-msd}
+\end{equation}
+with
+\begin{equation}
+  \boxed{D=\frac{\kb T\tau}{m}.}
+  \label{eq:thermal-gas-diffusivity}
+\end{equation}
+For $t\ll\tau$, expansion of the exponential gives
+$\langle\Delta X^2\rangle=(\kb T/m)t^2$.  The particle retains its velocity and
+moves ballistically.  For $t\gg\tau$,
+$\langle\Delta X^2\rangle=2Dt$ apart from a constant offset.  The overdamped
+Brownian model is the long-time limit of the thermal velocity process.
+
+\section{Chapter summary}
+
+The underdamped Langevin equation couples position, velocity, damping, and
+thermal noise.  Its stationary velocity distribution is Maxwell--Boltzmann and
+satisfies equipartition.  Exponential loss of velocity memory produces a
+ballistic mean-square displacement for $t\ll\tau$ and a diffusive
+mean-square displacement for $t\gg\tau$.  The long-time diffusion coefficient
+is $D=\kb T\tau/m$.  The next chapter applies an electric field to the same
+velocity dynamics and obtains the Drude response.

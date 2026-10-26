@@ -107,6 +107,39 @@ under `figures/`.
    charge neutrality, compensation, majority and minority carriers, freeze-out,
    temperature regimes, degeneracy, band-gap narrowing, nonuniform doping, and
    a verified computational neutrality solve.
+8. **Brownian Motion, Diffusion, and the Heat Equation** — random walks,
+   Wiener processes, Itô calculus, Fokker--Planck evolution, Fick's law,
+   finite-difference Laplacians, matrix-exponential propagation, and the heat
+   equation.
+9. **From Langevin Dynamics to the Maxwell--Boltzmann Gas** — inertial thermal
+   motion, fluctuation--dissipation balance, Maxwell velocities, velocity
+   memory, and the ballistic-to-Brownian crossover.
+10. **The Drude and Drude--Sommerfeld Electron Gases** — DC and AC Drude
+    response, mobility, the Einstein relation, Fermi--Dirac occupation, and the
+    Fermi-window conductivity tensor.
+11. **Effective Mass and the Semiconductor Carrier Model** — semiclassical
+    band dynamics, effective-mass tensors, multivalley transport, electron and
+    hole drift--diffusion currents, and carrier continuity.
+
+## Brownian-motion transport labs
+
+Five executed, self-contained computational labs connect microscopic random
+motion to macroscopic transport:
+
+- [`lab-01-brownian-to-ficks-law.ipynb`](figures/08_brownian-motion-diffusion/lab-01-brownian-to-ficks-law.ipynb)
+  develops mean-square displacement, the ensemble density, and Fick's laws.
+- [`lab-02-particle-current.ipynb`](figures/08_brownian-motion-diffusion/lab-02-particle-current.ipynb)
+  measures signed particle crossings and verifies Fick current and local
+  continuity.
+- [`lab-03-matrix-diffusion-exponential-evolution.ipynb`](figures/08_brownian-motion-diffusion/lab-03-matrix-diffusion-exponential-evolution.ipynb)
+  constructs the heat/diffusion matrix from discrete fluxes and evolves the
+  system with a matrix exponential.
+- [`lab-04-langevin-maxwell-boltzmann-drude.ipynb`](figures/08_brownian-motion-diffusion/lab-04-langevin-maxwell-boltzmann-drude.ipynb)
+  connects inertial Brownian motion to Maxwell–Boltzmann equilibrium, the
+  Einstein relation, and DC and AC Drude response.
+- [`lab-05-effective-mass-from-bands-to-transport.ipynb`](figures/08_brownian-motion-diffusion/lab-05-effective-mass-from-bands-to-transport.ipynb)
+  extracts the effective-mass tensor from band curvature and distinguishes its
+  density-of-states and multivalley transport roles.
 
 Bibliography metadata is in `bibliography/references.bib`.  Every figure
 caption carries a footnote to its corresponding notebook, allowing a student

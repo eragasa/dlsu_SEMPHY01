@@ -31,9 +31,11 @@ layout and build commands.
 The developing course manuscript is at the repository root in
 [`lecture-notes/`](lecture-notes/). Its opening sequence connects the particle
 in a box to Bloch states and HOMO--LUMO levels to tight-binding bands before
-introducing density of states and equilibrium carrier statistics.  Each
-published figure has a student-facing reproduction notebook identified by a
-footnote in its caption; see the
+introducing density of states and equilibrium carrier statistics. It then
+opens the transport sequence with Brownian motion, Fick's law, matrix diffusion,
+and semiconductor drift--diffusion currents. Each published figure has a
+student-facing reproduction notebook identified by a footnote in its caption;
+see the
 [lecture-note workflow](lecture-notes/README.md).
 
 ## Historical material
