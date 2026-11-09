@@ -120,6 +120,31 @@ under `figures/`.
 11. **Effective Mass and the Semiconductor Carrier Model** — semiclassical
     band dynamics, effective-mass tensors, multivalley transport, electron and
     hole drift--diffusion currents, and carrier continuity.
+12. **Mobility, Resistivity, and the Hall Effect** — lattice and impurity
+    scattering, Matthiessen's rule, conductivity, resistivity, Hall carrier
+    sign, Hall density, and Hall mobility.
+13. **Generation, Recombination, and Carrier Continuity** — excess-carrier
+    lifetime, direct and trap-assisted recombination, quasi-Fermi levels,
+    diffusion length, surface recombination, and Haynes--Shockley transport.
+14. **Barrier Transport and Space-Charge-Limited Current** — thermionic
+    emission, rectangular-barrier tunneling, injected space charge, and the
+    constant-mobility and velocity-saturated current laws.
+15. **High-Field Carrier Transport** — velocity saturation, transferred
+    electrons, negative differential mobility, and impact ionization.
+
+## Sze--Lee Chapter 2 computational sequence
+
+Four executed notebooks complete the semiconductor transport sequence:
+
+- [`fig_12_01.ipynb`](figures/12_mobility-resistivity-hall/fig_12_01.ipynb)
+  connects scattering-limited mobility to resistivity and Hall response.
+- [`fig_13_01.ipynb`](figures/13_generation-recombination-continuity/fig_13_01.ipynb)
+  verifies lifetime decay, quasi-Fermi splitting, diffusion length, and moving
+  minority-carrier packets.
+- [`fig_14_01.ipynb`](figures/14_barrier-space-charge-transport/fig_14_01.ipynb)
+  compares thermionic activation, tunneling, and space-charge current laws.
+- [`fig_15_01.ipynb`](figures/15_high-field-transport/fig_15_01.ipynb)
+  evaluates velocity saturation, intervalley transfer, and impact ionization.
 
 ## Brownian-motion transport labs
 

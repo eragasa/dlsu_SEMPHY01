@@ -19,6 +19,9 @@ density_of_states_figures
 equilibrium_semiconductors
     Fixed figure recipes for intrinsic populations, dopants, compensation, and
     temperature-dependent charge neutrality.
+transport_extensions
+    Reduced mobility, Hall, recombination, barrier, space-charge, and
+    high-field transport relations with fixed publication-figure recipes.
 
 The mirrored test tree under ``figures/tests/semphy`` gives every source module
 an immediately discoverable test file.  These implementations are educational

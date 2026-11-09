@@ -1,0 +1,170 @@
+\chapter{Barrier Transport and Space-Charge-Limited Current}
+\label{ch:barrier-space-charge-transport}
+
+Drift and diffusion describe carriers that remain inside a band.  Interfaces and
+strong injection introduce different transport controls.  Thermionic emission
+selects carriers above a barrier, tunneling transmits wave amplitude through a
+barrier, and space charge couples injected density back to the electric field
+\cite[Chap.~2]{szeLee2012}.
+
+\section{Notation and units}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Symbol & Meaning and SI unit unless stated otherwise \\
+\midrule
+$q,\kb,T$ & Positive elementary charge, Boltzmann constant, and absolute temperature. \\
+$E_C,E_F$ & Conduction-band edge and Fermi energy, measured in joules or electron-volts under one consistent convention. \\
+$\chi,V_n,\Phi_B$ & Electron affinity, conduction-band-to-Fermi-level separation, and emission barrier, each expressed in volts so multiplication by $q$ gives energy. \\
+$N_C,n_{\mathrm{th}}$ & Conduction-band effective density of states and thermionically eligible electron density, measured in inverse cubic meters. \\
+$A^*$ & Effective Richardson constant, measured in amperes per square meter-kelvin squared. \\
+$J_{\mathrm{th}}$ & Thermionic current density, measured in amperes per square meter. \\
+$U_0,E$ & Rectangular-barrier energy and incident carrier energy, measured in joules or electron-volts under one consistent convention. \\
+$d,\kappa,m^*,\hbar$ & Barrier width in meters, evanescent decay constant in inverse meters, effective mass in kilograms, and reduced Planck constant in joule-seconds. \\
+$\mathcal T(E)$ & Dimensionless transmission probability at energy $E$. \\
+$\rho,n,p,N_D^+,N_A^-$ & Charge density in coulombs per cubic meter and mobile or ionized carrier densities in inverse cubic meters. \\
+$\mathcal E$ & One-dimensional electric-field magnitude, measured in volts per meter. \\
+$J,\mu,\epsilon_s$ & Current density, mobility, and semiconductor permittivity in amperes per square meter, square meters per volt-second, and farads per meter. \\
+$V,L,v_s$ & Applied voltage in volts, layer length in meters, and saturation velocity in meters per second. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Thermionic emission}
+
+The electron affinity $\chi$ is the energy separation, expressed in volts,
+between the conduction-band edge and the vacuum level.  If
+$E_C-E_F=qV_n$, an electron must acquire energy $q(\chi+V_n)$ to leave an
+isolated n-type semiconductor.  In the nondegenerate limit, the population
+above that barrier scales as
+\begin{equation}
+  n_{\mathrm{th}}
+  \propto N_C
+  \exp\left[-\frac{q(\chi+V_n)}{\kb T}\right].
+  \label{eq:thermionic-tail-density}
+\end{equation}
+The exponential factor dominates the emission probability.  A modest change in
+barrier energy therefore changes the emitted population by orders of
+magnitude.
+
+The directed flux contains an additional velocity moment.  For a parabolic
+band and an ideal absorbing interface, the current takes the Richardson form
+\begin{equation}
+  J_{\mathrm{th}}=A^*T^2
+  \exp\left(-\frac{q\Phi_B}{\kb T}\right),
+  \label{eq:richardson-emission}
+\end{equation}
+where $A^*$ contains the transport effective mass and $\Phi_B$ is the relevant
+barrier in volts.  Interface reflection, image-force lowering, tunneling, and
+nonparabolic bands modify this ideal law.
+
+\section{Quantum tunneling through a barrier}
+
+Consider a rectangular barrier with energy height $U_0$ and width $d$.  For
+carrier energy $0<E<U_0$, the wavefunction inside the barrier contains
+evanescent terms with decay constant
+\begin{equation}
+  \kappa=\frac{\sqrt{2m^*(U_0-E)}}{\hbar}.
+  \label{eq:rectangular-kappa}
+\end{equation}
+Continuity of the wavefunction and its derivative gives
+\begin{equation}
+  \boxed{
+  \mathcal T(E)=
+  \left[
+    1+\frac{U_0^2\sinh^2(\kappa d)}{4E(U_0-E)}
+  \right]^{-1}.
+  }
+  \label{eq:rectangular-barrier-transmission}
+\end{equation}
+When $\kappa d\gg1$,
+\begin{equation}
+  \mathcal T(E)\propto e^{-2\kappa d}.
+  \label{eq:tunneling-wkb-scaling}
+\end{equation}
+The transmission increases for a thinner barrier, a lower barrier, a higher
+incident energy, or a smaller effective mass.  Tunneling and thermionic
+emission therefore sample different parts of the same energy landscape:
+thermionic carriers pass over a barrier, while tunneling carriers retain finite
+transmission below it.
+
+\section{Space charge from injected carriers}
+
+The semiconductor charge density is
+\begin{equation}
+  \rho=q(p-n+N_D^+-N_A^-).
+  \label{eq:semiconductor-space-charge-density}
+\end{equation}
+Charge neutrality makes this quantity nearly zero in a uniform bulk region.
+Strong injection breaks that cancellation.  For electron injection with
+$n\gg N_D^+$ and negligible holes, the charge magnitude is $qn$ and Poisson's
+equation links the carrier density to the field gradient.
+
+Assume a one-dimensional layer of length $L$, constant mobility, negligible
+diffusion, and an injecting contact at which the field vanishes.  Current and
+Poisson equations give
+\begin{equation}
+  J=qn\mu\mathcal E,
+  \qquad
+  \frac{\dd\mathcal E}{\dd x}=\frac{qn}{\epsilon_s}.
+  \label{eq:sclc-current-poisson}
+\end{equation}
+Eliminating $n$ yields
+\begin{equation}
+  \mathcal E\frac{\dd\mathcal E}{\dd x}
+  =\frac{J}{\epsilon_s\mu}.
+  \label{eq:sclc-field-equation}
+\end{equation}
+Two integrations produce the trap-free Mott--Gurney law
+\begin{equation}
+  \boxed{
+  J=\frac98\epsilon_s\mu\frac{V^2}{L^3}.
+  }
+  \label{eq:mott-gurney-law}
+\end{equation}
+The quadratic voltage dependence distinguishes space-charge-limited current
+from an ohmic current proportional to $V$.
+
+When carrier speed has reached a field-independent saturation value $v_s$,
+$J=qn v_s$.  Repeating the Poisson integration gives
+\begin{equation}
+  \boxed{
+  J=2\epsilon_s v_s\frac{V}{L^2}.
+  }
+  \label{eq:saturated-sclc-law}
+\end{equation}
+Velocity saturation changes both the voltage exponent and the length scaling.
+Traps introduce additional stored charge and produce other exponents or
+thresholds.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]
+    {figures/transport-barriers-space-charge.pdf}
+  \caption{Thermionic activation by the Boltzmann tail, tunneling through
+  finite-width barriers, and the distinct voltage scalings of constant-mobility
+  and velocity-saturated space-charge-limited current.\figurenotebookmark}
+  \label{fig:transport-barriers-space-charge}
+\end{figure}
+\figurenotebooktext{figures/14_barrier-space-charge-transport/fig_14_01.ipynb}
+
+\section{Range of validity}
+
+The thermionic law assumes a thermalized nondegenerate population and an ideal
+interface.  The rectangular-barrier result is one-dimensional, coherent, and
+elastic.  The Mott--Gurney law assumes trap-free injection, one carrier type,
+constant mobility, negligible diffusion, and an ohmic injecting contact.  Real
+interfaces combine thermionic emission, field lowering, tunneling, trapping,
+and contact resistance.  Their relative importance is determined by barrier
+shape, temperature, field, and scattering length.
+
+\section{Chapter summary}
+
+Thermionic emission depends exponentially on barrier energy relative to
+thermal energy.  Quantum tunneling depends exponentially on barrier width and
+evanescent decay constant.  Under strong injection, uncompensated mobile charge
+changes the electric field and produces space-charge-limited current.  Constant
+mobility yields $J\propto V^2/L^3$, while velocity saturation yields
+$J\propto V/L^2$.

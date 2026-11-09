@@ -55,7 +55,7 @@
 \newcommand{\materialname}{TODO: Material and phase/polytype}
 \newcommand{\submissiondate}{TODO: Submission date}
 \newcommand{\repositoryurl}{https://example.invalid/replace-me}
-\newcommand{\physkitversion}{TODO: PhysKit version/commit}
+\newcommand{\localmoduleversion}{TODO: local module file hashes or revision}
 
 % ---------- Frequently used notation ----------------------------------------
 \newcommand{\kB}{k_{\mathrm B}}
@@ -97,7 +97,7 @@
     Selected material: & \materialname \\
     Submission date: & \submissiondate \\
     Computational record: & \url{\repositoryurl} \\
-    PhysKit version: & \physkitversion
+    Local module revision: & \localmoduleversion
   \end{tabular}
 
   \vfill
@@ -145,11 +145,13 @@
 \todo{State the material-specific question investigated and summarize the path
 from the Bloch calculation to intrinsic and doped equilibrium statistics.}
 
-\subsection{Use of PhysKit and student-authored work}
+\subsection{Use of local libraries and student-authored work}
 
-The complete PhysKit library may be used \cite{physkit}. Distinguish maintained
-package capabilities from your own configuration, analysis, extension, and
-interpretation.
+The assessment supplies inspectable modules colocated with the notebooks.
+Distinguish supplied local capabilities from your own configuration, analysis,
+extension, and interpretation.  The submitted calculation must not depend on
+Project Koios or PhysKit. Compare the adopted carrier-statistics conventions
+with an established semiconductor reference such as Sze and Ng \cite{sze-ng}.
 
 \begin{table}[htbp]
   \centering
@@ -159,7 +161,7 @@ interpretation.
     \toprule
     Capability & Source & Configuration, extension, or validation performed \\
     \midrule
-    Bloch Hamiltonian & PhysKit & \todo{Version, model, parameters, and checks.} \\
+    Bloch Hamiltonian & \path{notebooks/bloch2d.py} & \todo{Revision, model, parameters, and checks.} \\
     DOS/state counting & \todo{Source} & \todo{Normalization and validation.} \\
     Carrier statistics & \todo{Source} & \todo{Integration/root-solving choices.} \\
     Dopant model & \todo{Source} & \todo{Charge-state convention and extension.} \\
@@ -183,7 +185,7 @@ neutrality, and calculated carriers.}{fig:model-map}
 
 \todo{Describe the direct/reciprocal lattice, cell, boundary conditions,
 potential, representation, reciprocal cutoff or discretization, and units.
-Explain what PhysKit supplies and what you configured.}
+Explain what the local plane-wave module supplies and what you configured.}
 
 A useful operator statement is
 \begin{equation}
@@ -402,7 +404,7 @@ bands, anisotropy, nonparabolicity, and limitations of the plotted path.}
 \subsection{Material model and intrinsic results}
 
 \todo{Define $\Eg(T)$, modeled components, temperature range, and any
-material-specific use or extension of PhysKit.}
+material-specific use or extension of the colocated semiconductor module.}
 
 \placeholderfigure{Calculated $\Nc(T)$, $\Nv(T)$, $\mui(T)$, and/or $\nIntrinsic(T)$ for the selected material.}{fig:material-intrinsic}
 
@@ -524,7 +526,7 @@ physical effect is most likely to invalidate it first?}
     \midrule
     Repository/archive & \url{\repositoryurl} \\
     Python version & \todo{ } \\
-    PhysKit version/commit & \physkitversion \\
+    Local module revision & \localmoduleversion \\
     Main dependencies & \todo{ } \\
     Run order & \todo{ } \\
     Random seeds, if any & \todo{ } \\

@@ -26,12 +26,14 @@ submission-ready.
 
 ## Supporting files
 
-- `src/` — reusable equilibrium-semiconductor model scaffold.
+- `notebooks/bloch2d.py` — colocated NumPy plane-wave Bloch and 2D DOS library.
+- `notebooks/semiconductor_model.py` — colocated equilibrium-semiconductor scaffold used by Parts II--IV.
+- `src/` — compatibility re-export of the notebook-colocated scaffold for the test suite.
 - `tests/` — validation tests and explicitly skipped implementation targets.
 - `data/` — material parameters, source notes, and digitized band-data scaffold.
 - `figures/` — generated assessment figures.
 - `templates/` — editable and compiled LaTeX report skeleton.
-- `requirements.txt` — Python dependencies and pinned PhysKit commit.
+- `requirements.txt` — standard NumPy, SciPy, pandas, Matplotlib, Jupyter, and pytest dependencies.
 - `pytest.ini` — test discovery and local import configuration.
 
 ## Python environment and tests

@@ -6,8 +6,8 @@ Course repository for DLSU course `SEMPHY01`.
 
 Long Assessment 1 is consolidated in
 [`dlsu_AY20262026T1/LA1/`](dlsu_AY20262026T1/LA1/). Its assessment brief,
-notebooks, source scaffold, tests, data, figures, dependency pin, and report
-template are all contained under that directory.
+notebooks, colocated NumPy/SciPy support modules, tests, data, figures,
+dependency list, and report template are all contained under that directory.
 
 Start from the assessment root so notebook imports and relative paths remain
 consistent:
@@ -33,7 +33,9 @@ The developing course manuscript is at the repository root in
 in a box to Bloch states and HOMO--LUMO levels to tight-binding bands before
 introducing density of states and equilibrium carrier statistics. It then
 opens the transport sequence with Brownian motion, Fick's law, matrix diffusion,
-and semiconductor drift--diffusion currents. Each published figure has a
+and semiconductor drift--diffusion currents before treating measured mobility,
+Hall response, generation--recombination, barrier transport, space charge, and
+high-field effects. Each published figure has a
 student-facing reproduction notebook identified by a footnote in its caption;
 see the
 [lecture-note workflow](lecture-notes/README.md).

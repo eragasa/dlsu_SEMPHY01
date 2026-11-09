@@ -1,0 +1,229 @@
+\chapter{Generation, Recombination, and Carrier Continuity}
+\label{ch:generation-recombination-continuity}
+
+Equilibrium fixes the product $np=n_i^2$.  Illumination, carrier injection, and
+impact ionization drive the semiconductor away from that constraint.
+Generation and recombination then determine how the carrier populations return
+toward equilibrium.  The continuity equations combine these local processes
+with drift and diffusion \cite[Chap.~2]{szeLee2012}.
+
+\section{Notation and units}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Symbol & Meaning and SI unit unless stated otherwise \\
+\midrule
+$n,p$ & Nonequilibrium electron and hole densities, measured in inverse cubic meters. \\
+$n_0,p_0,n_i$ & Equilibrium electron density, equilibrium hole density, and intrinsic carrier density, measured in inverse cubic meters. \\
+$\Delta n,\Delta p$ & Excess electron and hole densities above equilibrium, measured in inverse cubic meters. \\
+$G,R,G_{\mathrm{th}},G_L,U$ & Total generation, total recombination, thermal generation, optical generation, and net recombination rates, measured in inverse cubic meter-seconds. \\
+$G_n,G_p,R_n,R_p$ & Electron and hole generation and recombination rates in the continuity equations. \\
+$B$ & Band-to-band recombination coefficient, measured in cubic meters per second. \\
+$\tau_n,\tau_p$ & Electron and hole excess-carrier lifetimes, measured in seconds. \\
+$E_t,E_i$ & Trap energy and intrinsic reference energy, measured in joules or electron-volts under one consistent convention. \\
+$n_1,p_1$ & SRH auxiliary carrier densities associated with the trap energy, measured in inverse cubic meters. \\
+$S,p_s$ & Surface recombination velocity in meters per second and surface hole density in inverse cubic meters. \\
+$E_{Fn},E_{Fp}$ & Electron and hole quasi-Fermi energies. \\
+$\bm J_n,\bm J_p$ & Conventional electron and hole current densities, measured in amperes per square meter. \\
+$\Delta\sigma,\mu_n,\mu_p$ & Photoconductivity change in siemens per meter and electron and hole mobilities in square meters per volt-second. \\
+$D_p,L_p$ & Hole diffusivity in square meters per second and hole diffusion length in meters. \\
+$v_d,N$ & Packet drift velocity in meters per second and injected carrier number per unit area in inverse square meters. \\
+$x,t$ & Position in meters and time in seconds. \\
+$q,\kb,T$ & Positive elementary charge, Boltzmann constant, and absolute temperature. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Excess carriers and lifetime}
+
+Write the nonequilibrium densities as
+\begin{equation}
+  n=n_0+\Delta n,
+  \qquad
+  p=p_0+\Delta p.
+  \label{eq:excess-carrier-definitions}
+\end{equation}
+Uniform optical generation creates electron--hole pairs, so a quasineutral
+sample has $\Delta n=\Delta p$.  In an n-type sample under low-level injection,
+$\Delta p\ll n_0$ and the majority density changes by a negligible fraction.
+The net recombination rate then takes the lifetime form
+\begin{equation}
+  U=R-G_{\mathrm{th}}
+  =\frac{\Delta p}{\tau_p}.
+  \label{eq:minority-lifetime-model}
+\end{equation}
+For uniform generation $G_L$, the rate equation is
+\begin{equation}
+  \frac{\dd\Delta p}{\dd t}=G_L-\frac{\Delta p}{\tau_p}.
+  \label{eq:uniform-excess-rate}
+\end{equation}
+Constant illumination gives $\Delta p_{\mathrm{ss}}=G_L\tau_p$.  After the
+source is removed at $t=0$,
+\begin{equation}
+  \boxed{\Delta p(t)=\Delta p(0)e^{-t/\tau_p}.}
+  \label{eq:minority-lifetime-decay}
+\end{equation}
+Photoconductivity decay measures this time constant because
+$\Delta\sigma=q(\mu_n\Delta n+\mu_p\Delta p)$.
+
+\section{Direct and trap-assisted recombination}
+
+Band-to-band recombination has rate $R=Bnp$.  Detailed balance requires the
+thermal generation rate to equal $Bn_i^2$, giving
+\begin{equation}
+  \boxed{U_{\mathrm{dir}}=B(np-n_i^2).}
+  \label{eq:direct-net-recombination}
+\end{equation}
+This radiative channel is prominent in direct-gap semiconductors.  Under
+low-level injection in n-type material,
+$U_{\mathrm{dir}}\simeq Bn_0\Delta p$, so
+$\tau_p=(Bn_0)^{-1}$.
+
+A localized level $E_t$ in the gap supports electron capture and emission as
+well as hole capture and emission.  The Shockley--Read--Hall expression is
+\begin{equation}
+  \boxed{
+  U_{\mathrm{SRH}}
+  =\frac{np-n_i^2}
+  {\tau_p(n+n_1)+\tau_n(p+p_1)},
+  }
+  \label{eq:srh-rate}
+\end{equation}
+with
+\begin{equation}
+  n_1=n_i e^{(E_t-E_i)/(\kb T)},
+  \qquad
+  p_1=n_i e^{(E_i-E_t)/(\kb T)}.
+  \label{eq:srh-auxiliary-densities}
+\end{equation}
+For comparable capture times, levels near the intrinsic energy produce the
+largest recombination and generation rates.  This explains why midgap defects
+strongly control silicon carrier lifetime.
+
+An interface introduces a two-dimensional population of recombination centers.
+Under low-level injection its boundary rate is written
+\begin{equation}
+  U_s=S\,[p_s-p_0],
+  \label{eq:surface-recombination-rate}
+\end{equation}
+where $S$ has dimensions of velocity.  Surface passivation reduces $S$ rather
+than changing the bulk lifetime.
+
+\section{Quasi-Fermi levels}
+
+One equilibrium Fermi level cannot represent two independently displaced
+carrier populations.  Nondegenerate electron and hole densities define
+separate quasi-Fermi levels:
+\begin{equation}
+  n=n_i e^{(E_{Fn}-E_i)/(\kb T)},
+  \qquad
+  p=n_i e^{(E_i-E_{Fp})/(\kb T)}.
+  \label{eq:quasi-fermi-definitions}
+\end{equation}
+Their separation is
+\begin{equation}
+  \boxed{
+  E_{Fn}-E_{Fp}=\kb T\ln\left(\frac{np}{n_i^2}\right).
+  }
+  \label{eq:quasi-fermi-splitting}
+\end{equation}
+The levels coincide in equilibrium.  Optical generation or electrical
+injection produces a positive splitting when $np>n_i^2$.  Spatial gradients of
+the quasi-Fermi levels drive electron and hole currents.
+
+\section{Continuity and diffusion length}
+
+Local particle conservation gives
+\begin{equation}
+  \frac{\partial n}{\partial t}
+  =\frac1q\nabla\cdot\bm J_n+G_n-R_n,
+  \qquad
+  \frac{\partial p}{\partial t}
+  =-\frac1q\nabla\cdot\bm J_p+G_p-R_p.
+  \label{eq:nonequilibrium-continuity-pair}
+\end{equation}
+The opposite divergence signs follow from the opposite carrier charges.  These
+equations combine with the drift--diffusion currents from
+\cref{eq:carrier-model-electron-current,eq:carrier-model-hole-current} and
+Poisson's equation.
+
+For minority holes in a neutral n-type region with zero field and no volume
+generation, steady state gives
+\begin{equation}
+  D_p\frac{\dd^2\Delta p}{\dd x^2}
+  -\frac{\Delta p}{\tau_p}=0.
+  \label{eq:minority-hole-diffusion-equation}
+\end{equation}
+The diffusion length
+\begin{equation}
+  \boxed{L_p=\sqrt{D_p\tau_p}}
+  \label{eq:hole-diffusion-length}
+\end{equation}
+sets the spatial relaxation scale.  For injection at $x=0$ into a semi-infinite
+sample,
+\begin{equation}
+  \Delta p(x)=\Delta p(0)e^{-x/L_p}.
+  \label{eq:semi-infinite-minority-profile}
+\end{equation}
+A surface boundary replaces a prescribed concentration by a flux condition,
+\begin{equation}
+  D_p\left.\frac{\partial p}{\partial x}\right|_s
+  =S[p_s-p_0],
+  \label{eq:surface-recombination-boundary}
+\end{equation}
+with the sign chosen for the outward surface normal.
+
+\section{Drift, diffusion, and recombination of a packet}
+
+A localized minority-carrier pulse in a uniform field provides a direct
+transport measurement.  In one dimension,
+\begin{equation}
+  \frac{\partial\Delta p}{\partial t}
+  =D_p\frac{\partial^2\Delta p}{\partial x^2}
+  -v_d\frac{\partial\Delta p}{\partial x}
+  -\frac{\Delta p}{\tau_p}.
+  \label{eq:haynes-shockley-equation}
+\end{equation}
+An impulse containing $N$ carriers per unit area evolves as
+\begin{equation}
+  \Delta p(x,t)
+  =\frac{N}{\sqrt{4\pi D_pt}}
+   \exp\left[-\frac{(x-v_dt)^2}{4D_pt}-\frac{t}{\tau_p}\right].
+  \label{eq:haynes-shockley-solution}
+\end{equation}
+The packet center gives $v_d=\mu_pE$, its variance gives $2D_pt$, and its
+integrated amplitude gives $e^{-t/\tau_p}$.  One experiment therefore separates
+mobility, diffusivity, and lifetime.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.94\textwidth]
+    {figures/transport-nonequilibrium-carriers.pdf}
+  \caption{Temporal lifetime decay, quasi-Fermi-level splitting, the energy
+  selectivity of trap-assisted recombination, and the simultaneous drift,
+  diffusion, and recombination of a minority-carrier packet.\figurenotebookmark}
+  \label{fig:transport-nonequilibrium-carriers}
+\end{figure}
+\figurenotebooktext{figures/13_generation-recombination-continuity/fig_13_01.ipynb}
+
+\section{Range of validity}
+
+The lifetime equation assumes low-level injection and one dominant linear
+recombination channel.  Direct recombination becomes nonlinear at high
+injection.  The SRH model requires specified trap energies, capture cross
+sections, and charge states.  Quasi-Fermi levels require each carrier
+population to remain internally thermalized.  Diffusion-length solutions assume
+uniform coefficients and neutral regions; depletion fields and spatially
+varying material parameters require the coupled drift--diffusion--Poisson
+system.
+
+\section{Chapter summary}
+
+Generation displaces carrier populations from $np=n_i^2$, and recombination
+restores equilibrium.  Low-level excess carriers decay with a lifetime and over
+a diffusion length.  Direct and trap-assisted mechanisms produce different
+rate laws.  Quasi-Fermi levels quantify nonequilibrium carrier populations.
+Continuity combines these local rates with carrier current, while a moving
+minority-carrier packet exposes mobility, diffusivity, and lifetime separately.

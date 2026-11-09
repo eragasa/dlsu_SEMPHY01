@@ -4,7 +4,7 @@
 
 In this assessment, you will construct and validate a computational model that connects microscopic band dispersion to the equilibrium electron and hole populations of a bulk semiconductor. You will begin with a numerical `Bloch2D` model, reduce its band edges to an effective-mass representation, and investigate when that reduction reproduces the local curvature and density of states of the parent calculation. You will then build a three-dimensional intrinsic-semiconductor model, apply it to a real material chosen from the literature, and extend it to equilibrium n-type and p-type doping.
 
-This is an open computational investigation for a four-student course, not a fixed programming exercise. You have access to the full `physkit` library and may use any relevant models, solvers, unit systems, numerical tools, or visualization components. The intellectual work lies in choosing and connecting appropriate capabilities, checking their assumptions, validating the results, extending them where necessary, and explaining the resulting physical model.
+This is an open computational investigation for a four-student course, not a fixed programming exercise. The assessment supplies colocated NumPy/SciPy libraries for the two-dimensional plane-wave model and equilibrium-semiconductor data structures. The intellectual work lies in understanding, validating, and extending these transparent local implementations while explaining the resulting physical model.
 
 The project ends at **equilibrium carrier statistics**. Transport is outside the scope: do not calculate mobility, conductivity, resistivity, Hall coefficients, Seebeck coefficients, diffusion coefficients, current density, or device performance.
 
@@ -41,8 +41,8 @@ After completing the assessment, you should be able to:
 ## Assessment conditions
 
 - This is an **individual, open-note, open-computing-environment assessment**.
-- You may use the full public [`physkit`](https://github.com/eragasa/projectkoios-physkit) codebase and the assessment starter repository. You are not expected to reimplement maintained package capabilities merely to demonstrate that you can reproduce them.
-- Identify which capabilities are supplied by `physkit`, which configurations and analyses are your own, and what you changed or extended. Your scientific choices, material reconstruction, validation, interpretation, and defense must be your own.
+- Use the standard scientific Python dependencies in `requirements.txt` and the local libraries colocated under `notebooks/`. The submitted work must not depend on Project Koios or PhysKit.
+- Identify which capabilities are supplied by the local starter modules, which configurations and analyses are your own, and what you changed or extended. Your scientific choices, material reconstruction, validation, interpretation, and defense must be your own.
 - Students may discuss methods and share references. Any shared code or data must be identified; each submitted computational argument and interpretation must remain individually defensible.
 - Your submitted computational record must run from a clean environment from beginning to end.
 - All numerical quantities must carry documented units. Internally consistent SI units are recommended; final carrier concentrations must be reported in $\mathrm{cm^{-3}}$.
@@ -72,11 +72,11 @@ Before beginning the calculation, submit a one-page declaration containing:
 
 ---
 
-## Part I: Validate the effective-mass reduction using `Bloch2D`
+## Part I: Validate the effective-mass reduction using the local Bloch2D model
 
 ### I.1 Establish the parent band calculation
 
-Use appropriate `physkit` `Bloch2D` capabilities to establish a trustworthy parent calculation. Explain enough of the direct and reciprocal lattice, boundary conditions, numerical representation, Hamiltonian, and eigensolution that another student could understand and reproduce the model. Include a meaningful Hermiticity or operator-consistency check.
+Use the colocated `notebooks/bloch2d.py` implementation to establish a trustworthy parent calculation. Explain enough of the direct and reciprocal lattice, boundary conditions, numerical representation, Hamiltonian, and eigensolution that another student could understand and reproduce the model. Include a meaningful Hermiticity or operator-consistency check.
 
 Use both a high-symmetry path for interpretation and a two-dimensional Brillouin-zone sampling for extrema and state counting. A band path has zero area and cannot by itself support a DOS calculation. Clearly distinguish package-supplied behavior from your own configuration, analysis, and extensions.
 
@@ -162,7 +162,7 @@ Compare the numerical and analytic DOS near the selected edge. Explain the effec
 
 ## Part II: Construct and validate an intrinsic three-dimensional effective-mass model
 
-Use any suitable `physkit` capabilities for units, densities of states, Fermi–Dirac statistics, quadrature, root solving, data structures, or visualization. You may compose existing components, extend them, or implement a focused alternative where the library does not match your model. In every case, make the physical assumptions and validation evidence visible.
+Use NumPy, SciPy, pandas, Matplotlib, and the colocated `notebooks/semiconductor_model.py` scaffold for units, densities of states, Fermi–Dirac statistics, quadrature, root solving, data structures, and visualization. Extend or replace the scaffold where it does not match the selected physical model. In every case, make the assumptions and validation evidence visible.
 
 ### II.1 Define the physical state model
 
@@ -306,7 +306,7 @@ with $\mu_i$ close to, but not necessarily exactly at, midgap. Published values 
 
 ### II.6 Validation evidence
 
-Build a compact set of automated or reproducible checks appropriate to your chosen implementation. Taken together, the evidence should address monotonic behavior of $n$ and $p$ with chemical potential, charge-neutrality residuals, invariance under a rigid energy shift, isotropic and anisotropic mass limits, the expected $T^{3/2}$ scaling of effective densities for constant masses, and convergence of numerical integration. You may use `physkit` tests and validation objects as part of this evidence, but explain what each check establishes for your model.
+Build a compact set of automated or reproducible checks appropriate to your chosen implementation. Taken together, the evidence should address monotonic behavior of $n$ and $p$ with chemical potential, charge-neutrality residuals, invariance under a rigid energy shift, isotropic and anisotropic mass limits, the expected $T^{3/2}$ scaling of effective densities for constant masses, and convergence of numerical integration. Explain what each local test establishes for the model.
 
 ### Required outputs for Part II
 
@@ -524,11 +524,11 @@ Your answer must cite numerical evidence from your calculations and evidence fro
 
 ---
 
-## Computational organization and use of `physkit`
+## Computational organization and local libraries
 
-Organize the work so that the physical model, numerical choices, calculated results, validation evidence, and plots can be distinguished. You may use `physkit` objects directly, compose them with small student-authored functions, or develop a more specialized model where appropriate. There is no required class hierarchy or function naming scheme.
+Organize the work so that the physical model, numerical choices, calculated results, validation evidence, and plots can be distinguished. The supplied local modules are intentionally small enough to inspect and extend. Student-authored additions can remain in the notebooks or in new Python files colocated in `notebooks/`. There is no required class hierarchy or function naming scheme.
 
-Avoid hiding independent physics calculations inside plotting cells. Preserve enough parameter metadata and provenance that a result can be traced back to its material assumptions, package capabilities, and numerical settings. Prefer the simplest organization that remains readable, reproducible, and extensible for your chosen investigation.
+Avoid hiding independent physics calculations inside plotting cells. Preserve enough parameter metadata and provenance that a result can be traced back to its material assumptions, package capabilities, and numerical settings. Prefer the simplest organization that remains readable, reproducible, and extensible for your chosen investigation. Record local module versions or file hashes when the modules are changed.
 
 ## Suggested submission structure
 
@@ -544,8 +544,8 @@ semiconductor-assessment/
 │   ├── 01_bloch2d_validation.ipynb
 │   ├── 02_intrinsic_effmass.ipynb
 │   ├── 03_material_analysis.ipynb
-│   └── 04_doping_analysis.ipynb
-├── src/
+│   ├── 04_doping_analysis.ipynb
+│   ├── bloch2d.py
 │   └── semiconductor_model.py
 ├── tests/
 │   └── test_semiconductor_model.py
@@ -602,7 +602,7 @@ The evaluation will consider the overall quality of:
 - the clarity of the written report, notebook organization, and oral defense; and
 - the student's ability to explain and defend the choices made in the project.
 
-A successful submission should present a coherent path from the `Bloch2D` calculation to a three-dimensional intrinsic model and then to equilibrium donor and acceptor cases. It should provide enough numerical and documentary evidence to establish that the calculations are reproducible, charge neutral where required, and appropriate for the selected material. Alternative formulations are acceptable when their assumptions are explicit and their validity is demonstrated.
+A successful submission should present a coherent path from the local Bloch2D calculation to a three-dimensional intrinsic model and then to equilibrium donor and acceptor cases. It should provide enough numerical and documentary evidence to establish that the calculations are reproducible, charge neutral where required, and appropriate for the selected material. Alternative formulations are acceptable when their assumptions are explicit and their validity is demonstrated.
 
 Depth, scope, and suitable validation evidence will be discussed through the project declaration and short progress consultations. More complex materials are not expected to produce the same model form as simpler materials; they are expected to show an appropriate level of judgment about what can and cannot be represented reliably.
 

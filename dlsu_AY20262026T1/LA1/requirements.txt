@@ -1,5 +1,7 @@
-# PhysKit release used by notebooks/01_bloch2d_validation.ipynb
-# Requires Python 3.14 or newer.
-projectkoios-physkit @ git+https://github.com/eragasa/projectkoios-physkit.git@d6333208a1ff723682a557afd593a5c932058cb7
+# Self-contained LA1 notebook environment. Requires Python 3.14 or newer.
+numpy>=2.3,<3
+scipy>=1.16,<2
+pandas>=2.3,<4
+matplotlib>=3.10,<4
 jupyterlab>=4.4,<5
-pytest>=8,<10
+pytest>=8,<9
