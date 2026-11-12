@@ -16,10 +16,10 @@ resistivity and Hall data \cite[Chap.~2]{szeLee2012}.
 \toprule
 Symbol & Meaning and SI unit unless stated otherwise \\
 \midrule
-$q$ & Positive elementary-charge magnitude, measured in coulombs. \\
+$q,Q,s$ & Positive elementary-charge magnitude; carrier charge $Q=sq$; sign $s=-1$ for electrons and $s=+1$ for holes. \\
 $\bm E$ & Electric field, measured in volts per meter. \\
 $\bm B$ and $B_z$ & Magnetic flux density and its $z$ component, measured in teslas. \\
-$n,p$ & Electron and hole number densities, measured in inverse cubic meters. \\
+$n,p,N$ & Electron, hole, and generic one-carrier number densities, measured in inverse cubic meters. \\
 $m_n^*,m^*$ & Electron or generic conductivity effective mass, measured in kilograms. \\
 $\tau_n,\tau,\tau_r$ & Electron, total, or mechanism-specific momentum-relaxation time, measured in seconds; $r$ labels a scattering mechanism. \\
 $\bm v_{n,\mathrm d},v_{\mathrm{th}},\ell$ & Electron drift velocity and thermal speed in meters per second, and mean free path in meters. \\
@@ -27,10 +27,12 @@ $\mu,\mu_n,\mu_p,\mu_{\mathrm L},\mu_{\mathrm I},\mu_r$ & Total, electron, hole,
 $T,\kb$ & Absolute temperature in kelvin and Boltzmann constant in joules per kelvin. \\
 $N_{\mathrm I}$ & Total ionized-impurity density, measured in inverse cubic meters. \\
 $\bm J,J_x,I_x$ & Current density in amperes per square meter, its $x$ component, and total $x$-directed current in amperes. \\
-$\sigma,\rho$ & Conductivity in siemens per meter and resistivity in ohm-meters. \\
+$\sigma,\rho$ & Zero-field scalar conductivity in siemens per meter and resistivity in ohm-meters. \\
+$\hat{\bm\sigma},\hat{\bm\rho},\sigma_0$ & Magnetoconductivity tensor, magnetoresistivity tensor, and one-carrier zero-field conductivity. \\
+$\omega_c,\beta$ & Cyclotron-frequency magnitude $qB_z/m^*$ in inverse seconds and dimensionless magnetic-field parameter $\beta=\omega_c\tau=\mu B_z$. \\
 $t,R_{\square}$ & Sample thickness in meters and sheet resistance in ohms per square. \\
 $E_y,V_H,R_H$ & Hall field in volts per meter, Hall voltage in volts, and Hall coefficient in cubic meters per coulomb. \\
-$\mu_H$ & Hall mobility, measured in square meters per volt-second. \\
+$n_H,\mu_H,r_H$ & Hall density in inverse cubic meters, Hall mobility in square meters per volt-second, and dimensionless Hall scattering factor. \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -104,14 +106,84 @@ carrier density require Hall information.
 
 \section{Hall response}
 
-Let current flow along $x$ and apply $\bm B=B_z\hat{\bm z}$.  Transverse charge
-accumulation creates a Hall field until the transverse Lorentz force vanishes.
-For one dominant carrier type,
+\subsection{Lorentz-force balance and sign convention}
+
+Let the conventional current flow along $+x$ and apply
+$\bm B=B_z\hat{\bm z}$ with $B_z>0$.  A carrier with charge $Q=sq$, where
+$s=-1$ for an electron and $s=+1$ for a hole, experiences the Lorentz force
 \begin{equation}
-  E_y=R_HJ_xB_z,
+  \boxed{\bm F_{\mathrm L}=Q\bm v\times\bm B,}
+  \qquad
+  (F_{\mathrm L})_y=-Qv_xB_z.
+  \label{eq:transport-lorentz-force}
+\end{equation}
+A hole carries current with $v_x>0$, whereas an electron carries the same
+conventional current with $v_x<0$ and $Q<0$.  Thus $Qv_x>0$ in both cases and
+the magnetic force points toward the same physical edge, $-y$.  Holes leave
+positive charge on that edge; electrons leave negative charge.  The resulting
+Hall electric fields therefore point in opposite directions.  This is the
+origin of the Hall-sign test.
+
+Including momentum relaxation, the average drift velocity obeys
+\begin{equation}
+  \bm 0
+  =Q\left(\bm E+\bm v_{\mathrm d}\times\bm B\right)
+  -\frac{m^*\bm v_{\mathrm d}}{\tau}.
+  \label{eq:transport-hall-force-balance}
+\end{equation}
+For a single carrier population in the open-circuit transverse direction,
+$v_y=0$.  Its transverse component reduces to
+\begin{equation}
+  Q(E_y-v_xB_z)=0,
+  \qquad E_y=v_xB_z.
+  \label{eq:transport-hall-transverse-force-balance}
+\end{equation}
+Since $J_x=NQv_x$, this immediately gives
+$E_y/J_xB_z=1/(NQ)=s/(Nq)$.  More generally, the measurable condition is zero
+\emph{net} transverse current, $J_y=0$; this distinction matters when multiple
+bands or carrier types conduct simultaneously.
+
+Define the positive mobility $\mu=q\tau/m^*$, the zero-field conductivity
+$\sigma_0=Nq\mu$, and the signed-field parameter
+\begin{equation}
+  \beta=\omega_c\tau=\mu B_z,
+  \qquad
+  \omega_c=\frac{qB_z}{m^*}.
+  \label{eq:transport-hall-beta}
+\end{equation}
+Solving \cref{eq:transport-hall-force-balance} gives the one-carrier
+magnetoconductivity tensor
+\begin{equation}
+  \begin{pmatrix}J_x\\J_y\end{pmatrix}
+  =\hat{\bm\sigma}
+  \begin{pmatrix}E_x\\E_y\end{pmatrix},
+  \qquad
+  \hat{\bm\sigma}
+  =\frac{\sigma_0}{1+\beta^2}
+  \begin{pmatrix}
+    1&s\beta\\
+    -s\beta&1
+  \end{pmatrix}.
+  \label{eq:transport-one-carrier-magnetoconductivity}
+\end{equation}
+Its inverse is
+\begin{equation}
+  \hat{\bm\rho}=\hat{\bm\sigma}^{-1}
+  =\frac1{\sigma_0}
+  \begin{pmatrix}
+    1&-s\beta\\
+    s\beta&1
+  \end{pmatrix}.
+  \label{eq:transport-one-carrier-magnetoresistivity}
+\end{equation}
+With $J_y=0$, the second row yields
+\begin{equation}
+  E_y=\frac{s\beta}{\sigma_0}J_x
+  =\frac{s}{Nq}J_xB_z
+  \equiv R_HJ_xB_z.
   \label{eq:transport-hall-field}
 \end{equation}
-where
+Therefore
 \begin{equation}
   \boxed{
   R_H=-\frac1{qn}\quad\text{for electrons},
@@ -120,47 +192,148 @@ where
   }
   \label{eq:transport-hall-coefficients}
 \end{equation}
-For a rectangular sample of thickness $t$ carrying total current $I_x$,
+The sign follows from the stated directions of current, field, voltage leads,
+and magnetic field.  Reversing any one of those conventions reverses the
+measured voltage.  Notice also that
+$\rho_{xx}=1/\sigma_0$ is independent of $B_z$ in the ideal one-band,
+constant-$\tau$ Drude model.  Longitudinal magnetoresistance therefore signals
+physics absent from that model, such as multiple carrier populations,
+anisotropic Fermi surfaces, or an energy-dependent scattering process.
+
+\subsection{Hall voltage and extracted quantities}
+
+For a rectangular bar of width $w$ and thickness $t$,
+$J_x=I_x/(wt)$ and $E_y=V_H/w$.  The width cancels, giving
 \begin{equation}
   V_H=\frac{R_H I_xB_z}{t}.
   \label{eq:transport-hall-voltage}
 \end{equation}
-The sign identifies the dominant mobile charge.  The magnitude gives the
-one-carrier density, and the combination of Hall density and conductivity gives
-the Hall mobility,
+A small longitudinal voltage appears at the transverse contacts whenever they
+are not perfectly aligned.  Because the Hall signal is odd in magnetic field
+while the zero-field longitudinal offset is even, the experimental Hall
+voltage is isolated by antisymmetrization:
 \begin{equation}
-  \mu_H=|R_H|\sigma.
+  V_H^{\mathrm{odd}}(B)
+  =\frac{V_{xy}(+B)-V_{xy}(-B)}{2},
+  \qquad
+  R_H=\frac{t}{I_x}\frac{\mathrm dV_H^{\mathrm{odd}}}{\mathrm dB}.
+  \label{eq:transport-hall-antisymmetrization}
+\end{equation}
+Linearity of $V_H^{\mathrm{odd}}$ with both $I_x$ and $B$ is an internal check
+of the low-field, ohmic measurement.
+
+Under the one-carrier approximation, the measured Hall density and Hall
+mobility are
+\begin{equation}
+  n_H=\frac1{q|R_H|},
+  \qquad
+  \boxed{\mu_H=|R_H|\sigma=\frac{|R_H|}{\rho}.}
   \label{eq:transport-hall-mobility}
 \end{equation}
-A Hall scattering factor relates $\mu_H$ to the drift mobility when the
-relaxation time depends on carrier energy.  Multicarrier conduction replaces
-\cref{eq:transport-hall-coefficients} by a mobility-weighted expression, so a
-single inverse Hall coefficient no longer equals the total carrier density.
+For example, an electron sample with $n=2.0\times10^{22}\ \mathrm{m^{-3}}$
+and $\mu_n=0.12\ \mathrm{m^2\,V^{-1}\,s^{-1}}$ has
+$R_H=-3.12\times10^{-4}\ \mathrm{m^3\,C^{-1}}$.  At
+$I_x=1.0\ \mathrm{mA}$, $B_z=0.50\ \mathrm T$, and
+$t=0.50\ \mathrm{mm}$, \cref{eq:transport-hall-voltage} gives
+$V_H=-0.312\ \mathrm{mV}$.  The conductivity is
+$3.85\times10^2\ \mathrm{S\,m^{-1}}$, so the extracted Hall mobility is
+$0.120\ \mathrm{m^2\,V^{-1}\,s^{-1}}$ in the constant-$\tau$ limit.
+
+\subsection{Hall scattering factor}
+
+Conductivity averages one power of the relaxation time over the carriers that
+respond to the field, whereas the weak-field Hall response averages two.  For
+an isotropic parabolic band this distinction is summarized by
+\begin{equation}
+  R_H=\frac{s r_H}{Nq},
+  \qquad
+  r_H=\frac{\langle\tau^2\rangle_{\mathrm{tr}}}
+  {\langle\tau\rangle_{\mathrm{tr}}^2},
+  \qquad
+  \mu_H=r_H\mu.
+  \label{eq:transport-hall-factor}
+\end{equation}
+Consequently $n_H=N/r_H$ rather than $N$.  For a nondegenerate three-dimensional
+parabolic band with $\tau(E)\propto E^r$,
+\begin{equation}
+  r_H=
+  \frac{\Gamma(5/2+2r)\Gamma(5/2)}{\Gamma(5/2+r)^2}.
+  \label{eq:transport-hall-factor-power-law}
+\end{equation}
+Constant relaxation time gives $r_H=1$; the reduced acoustic-phonon law
+$r=-1/2$ gives $r_H=3\pi/8\simeq1.18$; and the ionized-impurity law $r=3/2$
+gives $r_H\simeq1.93$.  Band warping, degeneracy, and anisotropic scattering
+require a tensor Boltzmann calculation rather than this scalar factor.
+
+\subsection{Electron--hole conduction}
+
+When electrons and holes both contribute, their zero-field conductivities add,
+but their transverse responses have opposite signs.  The finite-field tensor
+components are
+\begin{align}
+  \sigma_{xx}(B)
+  &=q\left[
+  \frac{n\mu_n}{1+(\mu_nB)^2}
+  +\frac{p\mu_p}{1+(\mu_pB)^2}
+  \right],\\
+  \sigma_{xy}(B)
+  &=qB\left[
+  -\frac{n\mu_n^2}{1+(\mu_nB)^2}
+  +\frac{p\mu_p^2}{1+(\mu_pB)^2}
+  \right].
+  \label{eq:transport-two-carrier-conductivity}
+\end{align}
+Here
+$\hat{\bm\sigma}=\bigl(\begin{smallmatrix}\sigma_{xx}&\sigma_{xy}\\
+-\sigma_{xy}&\sigma_{xx}\end{smallmatrix}\bigr)$, so
+$\rho_{yx}=\sigma_{xy}/(\sigma_{xx}^2+\sigma_{xy}^2)$.  The weak-field Hall
+coefficient becomes
+\begin{equation}
+  \boxed{
+  R_H=
+  \frac{p\mu_p^2-n\mu_n^2}
+  {q\left(p\mu_p+n\mu_n\right)^2}.}
+  \label{eq:transport-two-carrier-hall}
+\end{equation}
+The mobility-squared weighting has three direct consequences.  The Hall sign
+can be controlled by a less numerous but more mobile carrier population;
+$R_H$ vanishes when $p\mu_p^2=n\mu_n^2$ even though both populations are
+finite; and $1/(q|R_H|)$ is not the total density.  Curvature of $V_H(B)$ and
+magnetoresistance provide evidence that a one-carrier extraction is
+insufficient.  In that regime, longitudinal and transverse data must be fitted
+together over magnetic field rather than reduced to one Hall density.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/transport-mobility-hall.pdf}
   \caption{Competing lattice and impurity mobility limits, the resulting
-  resistivity trend, and the opposite Hall signs of electron and hole
-  conduction.\figurenotebookmark}
+  resistivity trend, and the mobility-squared sign competition in a
+  two-carrier Hall response.\figurenotebookmark}
   \label{fig:transport-mobility-hall}
 \end{figure}
 \figurenotebooktext{figures/12_mobility-resistivity-hall/fig_12_01.ipynb}
 
 \section{Range of validity}
 
-The scalar formulas assume one isotropic band, low electric field, and a single
-dominant carrier type.  Tensor bands require tensor conductivity and Hall
-response.  Degenerate statistics require Fermi-window averages of the
-energy-dependent scattering time.  Strong magnetic fields require the full
-magnetoconductivity tensor.  The empirical power laws in
+The inverse-density extraction in \cref{eq:transport-hall-coefficients}
+assumes one isotropic carrier population and low electric field.  The
+finite-field Drude tensors remain useful beyond $\mu B\ll1$, but real tensor
+bands require a band-resolved conductivity calculation.  Degenerate statistics
+require Fermi-window averages of the energy-dependent scattering time.  A
+linear Hall slope alone cannot uniquely determine the parameters of several
+carrier populations; reliable multicarrier fitting needs both $\rho_{xx}(B)$
+and $\rho_{yx}(B)$ over a field range.  The empirical power laws in
 \cref{eq:transport-mobility-power-laws} identify trends but do not replace
 measured or microscopic scattering models.
 
 \section{Chapter summary}
 
 Effective mass converts momentum relaxation into mobility.  Lattice and
-ionized-impurity scattering contribute additive inverse mobilities.
-Conductivity combines carrier density and mobility, whereas Hall data separate
-carrier sign and an effective one-carrier density.  These measurements provide
-the transport parameters needed by the drift--diffusion equations.
+ionized-impurity scattering contribute additive inverse mobilities.  The
+Lorentz force produces the transverse Hall field, and inversion of the
+magnetoconductivity tensor fixes its sign and magnitude.  A one-carrier Hall
+measurement yields a Hall density and Hall mobility only after accounting for
+the Hall scattering factor.  With electrons and holes together, mobility-
+squared weighting controls the Hall sign and invalidates the inverse-density
+interpretation.  These measurements provide the transport parameters needed
+by the drift--diffusion equations.
