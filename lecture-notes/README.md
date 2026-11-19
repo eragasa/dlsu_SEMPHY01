@@ -131,6 +131,19 @@ under `figures/`.
     constant-mobility and velocity-saturated current laws.
 15. **High-Field Carrier Transport** — velocity saturation, transferred
     electrons, negative differential mobility, and impact ionization.
+16. **Equilibrium p--n Junction and Depletion Electrostatics** — contact
+    potential, charge neutrality, abrupt and graded depletion layers, and a
+    nonlinear Poisson--Boltzmann validation.
+17. **Depletion Capacitance and Doping Profiling** — incremental charge,
+    abrupt and graded C--V laws, varactors, and numerical profile extraction.
+18. **Junction Current--Voltage Characteristics** — the law of the junction,
+    minority diffusion, the ideal diode equation, depletion-region
+    generation--recombination, high injection, and series resistance.
+19. **Charge Storage, Diffusion Capacitance, and Switching** — charge control,
+    reverse recovery, and implicit transient minority diffusion.
+20. **Junction Breakdown and Heterojunctions** — tunneling, avalanche
+    integration, field crowding, band offsets, and heterojunction voltage
+    partition.
 
 ## Sze--Lee Chapter 2 computational sequence
 
@@ -145,6 +158,31 @@ Four executed notebooks complete the semiconductor transport sequence:
   compares thermionic activation, tunneling, and space-charge current laws.
 - [`fig_15_01.ipynb`](figures/15_high-field-transport/fig_15_01.ipynb)
   evaluates velocity saturation, intervalley transfer, and impact ionization.
+
+## Sze--Lee Chapter 3 computational sequence
+
+Five executed notebooks develop the p--n junction:
+
+- [`fig_16_01.ipynb`](figures/16_equilibrium-pn-junction/fig_16_01.ipynb)
+  compares depletion electrostatics with nonlinear Poisson--Boltzmann finite
+  differences.
+- [`fig_17_01.ipynb`](figures/17_depletion-capacitance-profiling/fig_17_01.ipynb)
+  validates C--V linearization and one-sided doping extraction.
+- [`fig_18_01.ipynb`](figures/18_junction-current-voltage/fig_18_01.ipynb)
+  checks finite-base minority diffusion and its junction-edge current.
+- [`fig_19_01.ipynb`](figures/19_charge-storage-switching/fig_19_01.ipynb)
+  resolves transient minority storage and extraction with implicit finite
+  differences.
+- [`fig_20_01.ipynb`](figures/20_breakdown-heterojunctions/fig_20_01.ipynb)
+  computes avalanche breakdown and ideal heterojunction band offsets.
+
+The notebooks also generate thirteen original schematic plates covering every
+physical figure subject in Sze--Lee Chapter 3, Figs. 1--30: junction formation,
+band diagrams, depletion profiles, bias response, capacitance construction,
+injection, diode characteristics, temperature response, the small-signal
+circuit, switching, breakdown, curvature, and heterojunction lineup. The
+schematics are generated from the chapter equations and do not reproduce
+scanned textbook artwork.
 
 ## Brownian-motion transport labs
 

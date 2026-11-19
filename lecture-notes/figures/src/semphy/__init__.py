@@ -22,6 +22,12 @@ equilibrium_semiconductors
 transport_extensions
     Reduced mobility, Hall, recombination, barrier, space-charge, and
     high-field transport relations with fixed publication-figure recipes.
+junctions
+    Depletion electrostatics, capacitance profiling, minority diffusion,
+    transient charge storage, avalanche breakdown, and heterojunction offsets.
+junction_atlas
+    Original equation-generated schematics covering the physical subjects of
+    the Sze--Lee Chapter 3 figure sequence.
 
 The mirrored test tree under ``figures/tests/semphy`` gives every source module
 an immediately discoverable test file.  These implementations are educational

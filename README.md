@@ -35,7 +35,9 @@ introducing density of states and equilibrium carrier statistics. It then
 opens the transport sequence with Brownian motion, Fick's law, matrix diffusion,
 and semiconductor drift--diffusion currents before treating measured mobility,
 Hall response, generation--recombination, barrier transport, space charge, and
-high-field effects. Each published figure has a
+high-field effects. The device sequence then develops equilibrium p--n
+junctions, depletion capacitance, diode current, charge storage, breakdown, and
+heterojunctions. Each published figure has a
 student-facing reproduction notebook identified by a footnote in its caption;
 see the
 [lecture-note workflow](lecture-notes/README.md).
