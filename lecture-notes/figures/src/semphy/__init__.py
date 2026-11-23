@@ -28,6 +28,9 @@ junctions
 junction_atlas
     Original equation-generated schematics covering the physical subjects of
     the Sze--Lee Chapter 3 figure sequence.
+device_prediction
+    Equilibrium-state transfer, generalized Einstein, ionized depletion, and
+    uncertainty relations for the integrated LA1-to-LA2 prediction chain.
 
 The mirrored test tree under ``figures/tests/semphy`` gives every source module
 an immediately discoverable test file.  These implementations are educational

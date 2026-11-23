@@ -63,6 +63,18 @@ For completely ionized, nondegenerate neutral regions,
   }
   \label{eq:pn-built-in-potential}
 \end{equation}
+More generally, if an equilibrium calculation supplies isolated n-type and
+p-type chemical potentials in one common band-energy reference, then
+\begin{equation}
+ qV_{\mathrm{bi}}
+ =\mu_n^{\mathrm{bulk}}-\mu_p^{\mathrm{bulk}}.
+ \label{eq:pn-built-in-from-bulk-chemical-potentials}
+\end{equation}
+This form remains the correct starting point when incomplete ionization or
+compensation makes $n\ne N_D$ or $p\ne N_A$.  A common rigid shift of both
+chemical potentials cancels from their difference.  Chapter~\ref{ch:equilibrium-to-device-prediction}
+develops the corresponding data-transfer and validation procedure.
+
 The contact potential is an internal equilibrium quantity.  A voltmeter does
 not read $V_{\mathrm{bi}}$ directly because contact potentials at the external
 terminals complete the electrochemical-potential balance.
@@ -86,7 +98,14 @@ The exact one-dimensional charge density is
   \rho(x)=q\bigl[p(x)-n(x)+N_D^+(x)-N_A^-(x)\bigr],
   \label{eq:pn-exact-charge-density}
 \end{equation}
-and electrostatics requires
+where the superscripts emphasize that depletion charge is set by ionized
+rather than nominal dopant density.  Complete ionization replaces
+$N_D^+,N_A^-$ by $N_D,N_A$.  A frozen-ionization approximation instead imports
+the homogeneous bulk values.  A local-equilibrium model recalculates dopant
+occupation as the bands bend and must retain $N_D^+(x)$ and $N_A^-(x)$ inside
+the nonlinear Poisson solve.
+
+Electrostatics requires
 \begin{equation}
   \frac{\dd E}{\dd x}=\frac{\rho}{\varepsilon_s},
   \qquad

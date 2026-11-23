@@ -104,6 +104,33 @@ Geometric correction factors convert the measured voltage-to-current ratio
 into $R_{\square}$.  The measurement determines resistivity; carrier type and
 carrier density require Hall information.
 
+\section{Diffusion and the generalized Einstein relation}
+
+For a nondegenerate carrier gas, drift and diffusion are linked by
+\begin{equation}
+ D_n=\mu_nV_T,
+ \qquad
+ D_p=\mu_pV_T,
+ \qquad
+ V_T=\frac{\kb T}{q}.
+ \label{eq:transport-classical-einstein}
+\end{equation}
+This relation uses drift mobility, not Hall mobility.  If a measured Hall
+mobility is used, the Hall scattering factor must first be removed according to
+the adopted convention.
+
+Degenerate carriers require the thermodynamic form
+\begin{equation}
+ \frac{D}{\mu}
+ =\frac{c}{q}\left(\frac{\partial\mu_c}{\partial c}\right)_T,
+ \label{eq:transport-generalized-einstein}
+\end{equation}
+where $c$ is the carrier density and $\mu_c$ is its chemical potential in
+energy units.  For a three-dimensional parabolic band this becomes a ratio of
+Fermi--Dirac integrals.  Chapter~\ref{ch:equilibrium-to-device-prediction}
+derives that ratio and shows how to test the Boltzmann limit before using
+$D=\mu V_T$.
+
 \section{Hall response}
 
 \subsection{Lorentz-force balance and sign convention}

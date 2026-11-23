@@ -144,6 +144,10 @@ under `figures/`.
 20. **Junction Breakdown and Heterojunctions** — tunneling, avalanche
     integration, field crowding, band offsets, and heterojunction voltage
     partition.
+21. **From Equilibrium State to Device Prediction** — machine-readable state
+    transfer, built-in voltage from bulk chemical potentials, incomplete
+    ionization in depletion charge, the generalized Einstein relation,
+    calibration versus validation, and uncertainty propagation.
 
 ## Sze--Lee Chapter 2 computational sequence
 
@@ -161,7 +165,7 @@ Four executed notebooks complete the semiconductor transport sequence:
 
 ## Sze--Lee Chapter 3 computational sequence
 
-Five executed notebooks develop the p--n junction:
+Six executed notebooks develop the p--n junction and integrated device prediction:
 
 - [`fig_16_01.ipynb`](figures/16_equilibrium-pn-junction/fig_16_01.ipynb)
   compares depletion electrostatics with nonlinear Poisson--Boltzmann finite
@@ -175,6 +179,9 @@ Five executed notebooks develop the p--n junction:
   differences.
 - [`fig_20_01.ipynb`](figures/20_breakdown-heterojunctions/fig_20_01.ipynb)
   computes avalanche breakdown and ideal heterojunction band offsets.
+- [`fig_21_01.ipynb`](figures/21_integrated-device-prediction/fig_21_01.ipynb)
+  integrates equilibrium-state transfer, degenerate diffusion, ionized
+  depletion charge, built-in voltage, and uncertainty ranking.
 
 The notebooks also generate thirteen original schematic plates covering every
 physical figure subject in Sze--Lee Chapter 3, Figs. 1--30: junction formation,

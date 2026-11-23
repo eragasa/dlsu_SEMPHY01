@@ -91,6 +91,20 @@ Si or GaAs in LA1 must still replace the example parameters with values
 consistent with their own phase, orientation, temperature, concentration,
 sample condition, and cited literature.
 
+### Lecture-note reading map
+
+The common-core derivations and numerical methods are developed in Chapters
+7--21 of the course notes. Chapter 12 treats mobility, conductivity, Hall
+response, and classical and generalized Einstein relations. Chapter 13 treats
+recombination and finite-difference continuity. Chapters 16--20 treat junction
+electrostatics, C--V response, current, charge storage, switching, and
+breakdown. Chapter 21 explicitly connects the LA1 equilibrium-state record to
+built-in voltage, ionized depletion charge, degenerate diffusion, calibration,
+validation, sensitivity, and uncertainty.
+
+Material-specific mobility, lifetime, surface, contact, and high-field
+parameters must still be obtained from independent literature.
+
 ## Required LA1-to-LA2 transfer package
 
 Before beginning new transport calculations, create an immutable transfer package under `data/la1-transfer/` containing:
