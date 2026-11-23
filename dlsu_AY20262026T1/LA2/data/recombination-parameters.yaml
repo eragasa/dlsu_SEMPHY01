@@ -1,0 +1,22 @@
+# State whether each value is measured, fitted, or derived.
+material: null
+phase_or_polytype: null
+injection_regime: null
+bulk_model:
+  type: null  # measured_lifetime, SRH, direct, SRH_plus_Auger, etc.
+  electron_lifetime_s: null
+  hole_lifetime_s: null
+  center_energy_eV: null
+  center_density_m3: null
+  electron_capture_cross_section_m2: null
+  hole_capture_cross_section_m2: null
+  direct_coefficient_m3_s: null
+  electron_auger_coefficient_m6_s: null
+  hole_auger_coefficient_m6_s: null
+  temperature_K: null
+  source: null
+surface:
+  electron_velocity_m_s: null
+  hole_velocity_m_s: null
+  preparation: null
+  source: null

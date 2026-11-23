@@ -1,0 +1,4 @@
+material,temperature_K,case_id,donor_m3,acceptor_m3,ionized_donor_m3,ionized_acceptor_m3,electron_m3,hole_m3,chemical_potential_eV,intrinsic_m3,band_gap_eV,neutrality_residual_m3
+REPLACE_ME,300,intrinsic,0,0,0,0,,,,,,
+REPLACE_ME,300,n_side,,,,,,,,,,
+REPLACE_ME,300,p_side,,,,,,,,,,

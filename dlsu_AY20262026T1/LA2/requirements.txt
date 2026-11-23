@@ -1,0 +1,9 @@
+# Self-contained LA2 notebook environment. Requires Python 3.14 or newer.
+numpy>=2.3,<3
+scipy>=1.16,<2
+pandas>=2.3,<4
+matplotlib>=3.10,<4
+pyyaml>=6,<7
+jupyterlab>=4.4,<5
+nbconvert>=7.16,<8
+pytest>=8,<9

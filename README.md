@@ -28,6 +28,12 @@ uv run --python 3.14 --with-requirements requirements.txt jupyter lab
 See the [LA1 workspace guide](dlsu_AY20262026T1/LA1/README.md) for the complete
 layout and build commands.
 
+Long Assessment 2 continues from the submitted LA1 equilibrium state into
+transport, recombination, p--n-junction electrostatics, diode current, stored
+charge, and switching prediction. Its assessment brief, data templates,
+self-contained Si/GaAs example notebooks, local model, tests, and figures are
+under [`dlsu_AY20262026T1/LA2/`](dlsu_AY20262026T1/LA2/).
+
 The developing course manuscript is at the repository root in
 [`lecture-notes/`](lecture-notes/). Its opening sequence connects the particle
 in a box to Bloch states and HOMO--LUMO levels to tight-binding bands before

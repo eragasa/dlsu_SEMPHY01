@@ -1,0 +1,29 @@
+# Replace every null with a material-, direction-, temperature-, and
+# concentration-specific value supported by a cited source.
+material: null
+phase_or_polytype: null
+mobility:
+  electron:
+    model: null
+    direction: null
+    parameters: {}
+    valid_temperature_K: [null, null]
+    valid_concentration_cm3: [null, null]
+    source: null
+  hole:
+    model: null
+    direction: null
+    parameters: {}
+    valid_temperature_K: [null, null]
+    valid_concentration_cm3: [null, null]
+    source: null
+hall:
+  electron_factor: null
+  hole_factor: null
+  convention: null
+  source: null
+permittivity:
+  relative_static: null
+  direction: null
+  temperature_K: null
+  source: null

@@ -1,0 +1,24 @@
+material: null
+phase_or_polytype: null
+junction:
+  type: abrupt_homojunction
+  orientation: null
+  area_m2: null
+  temperature_K: null
+  nominal_acceptor_m3: null
+  nominal_donor_m3: null
+  ionized_acceptor_m3: null
+  ionized_donor_m3: null
+  p_neutral_length_m: null
+  n_neutral_length_m: null
+contacts:
+  p_contact: equilibrium_ohmic
+  n_contact: equilibrium_ohmic
+bias:
+  forward_range_V: [null, null]
+  reverse_range_V: [null, null]
+operating_point:
+  voltage_V: null
+  current_density_A_m2: null
+  frequency_Hz: null
+exclusions: []

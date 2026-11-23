@@ -1,0 +1,14 @@
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+*.pyc
+templates/*.aux
+templates/*.bbl
+templates/*.bcf
+templates/*.blg
+templates/*.fdb_latexmk
+templates/*.fls
+templates/*.log
+templates/*.out
+templates/*.run.xml
+templates/*.toc

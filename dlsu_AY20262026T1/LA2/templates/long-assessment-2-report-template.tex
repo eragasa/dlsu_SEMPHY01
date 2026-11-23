@@ -1,0 +1,226 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[backend=biber,style=numeric-comp,sorting=nyt]{biblatex}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\addbibresource{references.bib}
+\graphicspath{{../figures/}{figures/}}
+\hypersetup{colorlinks=true,linkcolor=MidnightBlue,citecolor=ForestGreen,urlcolor=BrickRed,pdftitle={SEMPHY01 Long Assessment 2}}
+\sisetup{scientific-notation=true,separate-uncertainty=true,per-mode=symbol}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setlist{nosep}
+
+\newcommand{\studentname}{TODO: Student Name}
+\newcommand{\studentid}{TODO: Student ID}
+\newcommand{\materialname}{TODO: Material and exact phase/polytype}
+\newcommand{\submissiondate}{TODO: Submission date}
+\newcommand{\repositoryurl}{https://example.invalid/replace-me}
+\newcommand{\laonerevision}{TODO: LA1 commit, archive, or manifest hash}
+\newcommand{\todo}[1]{\textcolor{BrickRed}{\textbf{TODO:} #1}}
+\newcommand{\placeholderfigure}[3][0.86\linewidth]{\begin{figure}[htbp]\centering\fbox{\parbox[c][42mm][c]{#1}{\centering #2}}\caption{#2}\label{#3}\end{figure}}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\lhead{SEMPHY01 --- Long Assessment 2}
+\rhead{\studentname}
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+{\Large De La Salle University\par}
+\vspace{8mm}
+{\large SEMPHY01 --- Semiconductor Physics\par}
+\vspace{18mm}
+{\Huge\bfseries Long Assessment 2\par}
+\vspace{4mm}
+{\LARGE From Equilibrium Carrier Statistics to Transport and p--n Junction Prediction\par}
+\vspace{18mm}
+\begin{tabular}{@{}rl@{}}
+Student: & \studentname\\
+Student ID: & \studentid\\
+Material: & \materialname\\
+Submission date: & \submissiondate\\
+LA1 revision: & \laonerevision\\
+Computational record: & \url{\repositoryurl}
+\end{tabular}
+\vfill
+\begin{minipage}{0.88\textwidth}\small
+This report must distinguish quantities inherited from LA1 from new mobility,
+scattering, recombination, geometry, contact, and high-field assumptions.
+Absolute mobility and lifetime are not inferred from effective mass and carrier
+statistics alone.
+\end{minipage}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Declaration, research question, and LA1 transfer}
+
+\begin{table}[htbp]
+\centering
+\caption{Declared transport and device model.}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.27\textwidth}X@{}}
+\toprule
+Item & Declaration\\
+\midrule
+Material continuity & \todo{Exact LA1 material, phase/polytype, and revision.}\\
+Temperature range & \todo{Common validated range.}\\
+Junction geometry & \todo{Orientation, area, doping, and neutral lengths.}\\
+Mobility model & \todo{Electron/hole models, directions, and sources.}\\
+Recombination model & \todo{Lifetime or microscopic model and injection range.}\\
+Electrostatics & \todo{Depletion and numerical model.}\\
+Current model & \todo{Finite/long base and nonideal terms.}\\
+Dynamic prediction & \todo{Stored charge, switching, or collection calculation.}\\
+Operating limit & \todo{Field, breakdown, heating, or documented exclusion.}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Research question}
+\todo{State one material-specific device prediction question. Compare notation
+and junction conventions with established references such as Sze--Lee
+\cite{sze-lee} and characterize measurements using an appropriate source such
+as Schroder \cite{schroder}.}
+
+\subsection{Transfer integrity}
+\todo{Identify the immutable LA1 package, hashes, neutrality residuals, energy reference, and any corrected LA1 result.}
+
+\placeholderfigure{LA1-to-LA2 model map distinguishing inherited state from new constitutive physics.}{fig:model-map}
+
+\section{Homogeneous transport}
+
+\subsection{Mobility, scattering, and provenance}
+\todo{Define electron and hole mobility models. Explain why effective mass alone does not determine mobility.}
+
+\begin{table}[htbp]
+\centering
+\caption{New transport and recombination parameters.}
+\begin{tabularx}{\textwidth}{@{}llllX@{}}
+\toprule
+Quantity & Value/model & Unit & Valid range & Source and definition\\
+\midrule
+$\mu_n$ & \todo{ } & \si{\meter\squared\per\volt\per\second} & \todo{ } & \todo{ }\\
+$\mu_p$ & \todo{ } & \si{\meter\squared\per\volt\per\second} & \todo{ } & \todo{ }\\
+$\tau_n$ & \todo{ } & \si{\second} & \todo{ } & \todo{ }\\
+$\tau_p$ & \todo{ } & \si{\second} & \todo{ } & \todo{ }\\
+$\varepsilon_s$ & \todo{ } & \si{\farad\per\meter} & \todo{ } & \todo{ }\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Conductivity, resistivity, Hall response, and diffusion}
+\begin{align}
+\sigma&=q(n\mu_n+p\mu_p),\\
+R_H&=\frac{p\mu_p^2-n\mu_n^2}{q(p\mu_p+n\mu_n)^2},\\
+D_{n,p}&=\mu_{n,p}\frac{k_BT}{q}\quad\text{in the nondegenerate limit}.
+\end{align}
+\placeholderfigure{Mobility, conductivity/resistivity, Hall response, and Einstein-relation validity.}{fig:transport}
+\todo{Trace each curve to the transferred LA1 carrier state and the new mobility model.}
+
+\section{Recombination and continuity}
+
+\todo{Define the lifetime or recombination model, injection range, and boundary physics.}
+\begin{equation}
+\frac{\partial\Delta c}{\partial t}=D\frac{\partial^2\Delta c}{\partial x^2}-v_d\frac{\partial\Delta c}{\partial x}-U(\Delta c)+G(x,t).
+\end{equation}
+\placeholderfigure{Analytic and finite-difference minority profiles, transient evolution, and conservation check.}{fig:continuity}
+
+\begin{table}[htbp]
+\centering
+\caption{Continuity-solver validation.}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Check & Coarse & Refined & Interpretation\\
+\midrule
+Profile error & \todo{ } & \todo{ } & \todo{ }\\
+Flux error & \todo{ } & \todo{ } & \todo{ }\\
+Charge-balance residual & \todo{ } & \todo{ } & \todo{ }\\
+Minimum concentration & \todo{ } & \todo{ } & \todo{ }\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{p--n-junction electrostatics and capacitance}
+
+\subsection{Transferred bulk states and built-in potential}
+\begin{equation}
+qV_{\mathrm{bi}}=\mu_n^{\mathrm{bulk}}-\mu_p^{\mathrm{bulk}}.
+\end{equation}
+\todo{Compare chemical-potential, carrier-density, fully ionized, and numerical electrostatic results.}
+
+\subsection{Depletion and numerical Poisson solutions}
+\begin{equation}
+W=\sqrt{\frac{2\varepsilon_s}{q}(V_{\mathrm{bi}}-V)\left(\frac{1}{N_A^-}+\frac{1}{N_D^+}\right)}.
+\end{equation}
+\placeholderfigure{Charge, field, potential, and band diagrams at equilibrium and selected biases.}{fig:electrostatics}
+\placeholderfigure{Numerical Poisson result compared with the depletion approximation.}{fig:poisson}
+
+\subsection{C--V prediction}
+\begin{equation}
+C_j=\frac{\varepsilon_s}{W}.
+\end{equation}
+\placeholderfigure{$C_j(V_R)$, $1/C_j^2$, and recovered ionized doping.}{fig:cv}
+
+\section{Diode current, charge storage, and dynamics}
+
+\subsection{Finite-base current}
+\begin{equation}
+J_s=q\left[\frac{D_nn_{p0}}{L_n}\coth\left(\frac{w_p}{L_n}\right)+\frac{D_pp_{n0}}{L_p}\coth\left(\frac{w_n}{L_p}\right)\right].
+\end{equation}
+\todo{Trace $n_{p0}$ and $p_{n0}$ to LA1 and $D$, $L$ to the new transport/recombination model.}
+\placeholderfigure{Ideal and nonideal current components with extracted ideality factor.}{fig:iv}
+
+\subsection{Stored charge and transient prediction}
+\begin{align}
+Q_s&=q\int\Delta c(x)\,\mathrm dx,\\
+C_d&=\frac{\mathrm dQ_s}{\mathrm dV}.
+\end{align}
+\placeholderfigure{Stored charge, depletion and diffusion capacitance, and transient terminal response.}{fig:dynamics}
+
+\subsection{Operating limit}
+\todo{Estimate one field, breakdown, tunneling, velocity-saturation, punch-through, series-resistance, or heating limit.}
+
+\section{Integrated prediction and uncertainty}
+
+\begin{table}[htbp]
+\centering
+\caption{Declared device operating-point prediction.}
+\begin{tabularx}{\textwidth}{@{}lrrX@{}}
+\toprule
+Quantity & Prediction & Uncertainty/range & Dominant source\\
+\midrule
+\todo{ } & \todo{ } & \todo{ } & \todo{ }\\
+\todo{ } & \todo{ } & \todo{ } & \todo{ }\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\placeholderfigure{Validity map in temperature, concentration, bias, field, injection, or length.}{fig:validity-map}
+
+\section{Validation against independent evidence}
+\todo{Separate calibration data from at least two independent validation comparisons.}
+
+\section{Conclusion}
+\todo{State the most reliable prediction, least reliable prediction, dominant LA1 parameter, dominant new LA2 uncertainty, first failing assumption, and next needed experiment or calculation.}
+
+\printbibliography
+\end{document}
