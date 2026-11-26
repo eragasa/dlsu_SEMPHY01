@@ -16,7 +16,14 @@ from scipy.constants import elementary_charge as Q
 from scipy.constants import epsilon_0 as EPSILON_0
 from scipy.optimize import brentq
 
-from .junctions import FIGURE_DIR, avalanche_breakdown_voltage
+from .junctions import (
+    FIGURE_DIR,
+    abrupt_depletion_profile,
+    avalanche_breakdown_voltage,
+    ideal_diffusion_saturation_current_density,
+    ideal_diode_current_density,
+    solve_poisson_boltzmann_junction,
+)
 
 mpl.rcParams.update(
     {
@@ -75,43 +82,147 @@ def _band_diagram(axis: plt.Axes, barrier: float, title: str, *, offsets: bool =
 
 
 def junction_formation_atlas() -> None:
-    """Generate rectification, junction formation, and charge-transition panels."""
+    """Generate one parameter-consistent junction-formation calculation.
+
+    Every panel uses the same nondegenerate Si-like abrupt junction.  Isolated
+    Fermi levels follow effective-density-of-states statistics, equilibrium
+    bands and charge come from the nonlinear Poisson--Boltzmann solution, the
+    comparison profile is the analytic depletion approximation, and the I--V
+    curve uses the long-base minority-diffusion saturation current.
+    """
+    acceptor, donor, intrinsic, temperature = 5.0e22, 1.0e22, 1.0e16, 300.0
+    permittivity = 11.7 * EPSILON_0
+    thermal_voltage = K_B * temperature / Q
+    conduction_dos, valence_dos = 2.8e25, 1.04e25
+    # Enforce n_i^2=N_C*N_V*exp(-E_g/kT), so the isolated Fermi-level
+    # separation and the Poisson--Boltzmann contact potential are identical.
+    band_gap_ev = thermal_voltage * np.log(
+        conduction_dos * valence_dos / intrinsic**2
+    )
+    depletion = abrupt_depletion_profile(
+        acceptor, donor, intrinsic, temperature, permittivity
+    )
+    numerical = solve_poisson_boltzmann_junction(
+        acceptor,
+        donor,
+        intrinsic,
+        temperature,
+        permittivity,
+        points=601,
+    )
+
+    electron_mobility, hole_mobility = 0.135, 0.048
+    electron_lifetime = hole_lifetime = 1.0e-6
+    electron_diffusivity = electron_mobility * thermal_voltage
+    hole_diffusivity = hole_mobility * thermal_voltage
+    saturation_current = ideal_diffusion_saturation_current_density(
+        acceptor,
+        donor,
+        intrinsic,
+        electron_diffusivity,
+        hole_diffusivity,
+        electron_lifetime,
+        hole_lifetime,
+    )
+
     figure, axes = plt.subplots(2, 2, figsize=(9.0, 6.2), layout="constrained")
-    voltage = np.linspace(-6.0, 0.82, 700)
-    forward = np.expm1(np.clip(voltage / 0.052, -100.0, 14.0))
-    avalanche = -np.where(voltage < -4.5, np.exp((-voltage - 4.5) / 0.22), 0.0)
-    axes[0, 0].plot(voltage, forward + avalanche, color=BLUE)
+    voltage = np.linspace(-0.20, 0.72, 700)
+    current = ideal_diode_current_density(voltage, saturation_current, temperature)
+    axes[0, 0].plot(voltage, current, color=BLUE)
+    axes[0, 0].axhline(-saturation_current, color=GRAY, linestyle="--", label=r"$-J_s$")
     axes[0, 0].axhline(0, color="black", linewidth=0.7)
     axes[0, 0].axvline(0, color="black", linewidth=0.7)
-    axes[0, 0].annotate("forward conduction", (0.58, 2.8e5), xytext=(-0.3, 5.0e5), arrowprops={"arrowstyle": "->"})
-    axes[0, 0].annotate("breakdown", (-5.1, -10), xytext=(-3.9, -80), arrowprops={"arrowstyle": "->"})
-    axes[0, 0].set(xlabel="junction voltage", ylabel="current (schematic)", title="Rectifying characteristic")
-    axes[0, 0].set_ylim(-120, 8e5)
+    axes[0, 0].set_yscale("symlog", linthresh=saturation_current / 10.0)
+    axes[0, 0].set(
+        xlabel="junction voltage (V)",
+        ylabel=r"current density (A m$^{-2}$)",
+        title="Long-base diffusion rectification",
+    )
+    axes[0, 0].legend()
     _clean(axes[0, 0])
 
-    x = np.linspace(-1, 1, 300)
-    axes[0, 1].plot(x[x < 0], np.full(np.sum(x < 0), -0.42), color=RED, label=r"p: $E_F$")
-    axes[0, 1].plot(x[x >= 0], np.full(np.sum(x >= 0), 0.42), color=BLUE, label=r"n: $E_F$")
-    axes[0, 1].plot(x, np.full_like(x, 0.8), color="black", label=r"$E_C$")
-    axes[0, 1].plot(x, np.full_like(x, -0.8), color="black", label=r"$E_V$")
+    p_fermi_ev = thermal_voltage * np.log(valence_dos / acceptor)
+    n_fermi_ev = band_gap_ev - thermal_voltage * np.log(conduction_dos / donor)
+    left_x = np.linspace(-1.0, -0.03, 150)
+    right_x = np.linspace(0.03, 1.0, 150)
+    axes[0, 1].plot((-1.0, 1.0), (band_gap_ev, band_gap_ev), color=BLUE, label=r"$E_C$")
+    axes[0, 1].plot((-1.0, 1.0), (0.0, 0.0), color=RED, label=r"$E_V$")
+    axes[0, 1].plot(left_x, np.full_like(left_x, p_fermi_ev), color=GRAY, linewidth=1.8)
+    axes[0, 1].plot(right_x, np.full_like(right_x, n_fermi_ev), color=GRAY, linewidth=1.8, label=r"$E_F$")
     axes[0, 1].axvline(0, color="0.6", linestyle=":")
-    axes[0, 1].set(xlabel="isolated samples", ylabel="energy", title="Before contact: unequal Fermi levels")
-    axes[0, 1].set_yticks([])
-    axes[0, 1].legend(ncol=2)
+    axes[0, 1].annotate(
+        "",
+        xy=(0.34, n_fermi_ev),
+        xytext=(0.34, p_fermi_ev),
+        arrowprops={"arrowstyle": "<->"},
+    )
+    axes[0, 1].text(
+        0.39,
+        0.5 * (p_fermi_ev + n_fermi_ev),
+        fr"$qV_{{bi}}={float(depletion['built_in_v']):.3f}\,$eV",
+        va="center",
+    )
+    axes[0, 1].text(-0.80, 0.05, "p", color=RED, fontweight="bold")
+    axes[0, 1].text(0.72, 0.05, "n", color=BLUE, fontweight="bold")
+    axes[0, 1].set(
+        xlabel="isolated samples",
+        ylabel="energy (eV)",
+        title="Before contact: carrier-statistics levels",
+        ylim=(-0.08, band_gap_ev + 0.10),
+    )
+    axes[0, 1].legend(ncol=3, loc="upper center")
     _clean(axes[0, 1])
 
-    _band_diagram(axes[1, 0], 0.78, "After contact: flat equilibrium Fermi level")
-    axes[1, 0].annotate(r"$qV_{bi}$", (0.03, 0.95), xytext=(-0.52, 1.18), arrowprops={"arrowstyle": "<->"})
+    position_um = np.asarray(numerical["position_m"]) * 1.0e6
+    potential = np.asarray(numerical["potential_v"])
+    conduction_band = thermal_voltage * np.log(conduction_dos / intrinsic) - potential
+    valence_band = conduction_band - band_gap_ev
+    axes[1, 0].plot(position_um, conduction_band, color=BLUE, label=r"$E_C$")
+    axes[1, 0].plot(position_um, valence_band, color=RED, label=r"$E_V$")
+    axes[1, 0].axhline(0.0, color=GRAY, linestyle="--", label=r"$E_F$")
+    axes[1, 0].axvline(0.0, color="0.65", linestyle=":")
+    axes[1, 0].set(
+        xlabel="position (µm)",
+        ylabel="energy relative to $E_F$ (eV)",
+        title="After contact: Poisson--Boltzmann bands",
+    )
+    axes[1, 0].legend(ncol=3)
+    _clean(axes[1, 0])
 
-    charge_x = np.linspace(-1.1, 1.1, 500)
-    smooth = np.where(charge_x < 0, -1.0, 1.0) * np.exp(-(np.abs(charge_x) / 0.65) ** 5)
-    rectangular = np.where(np.abs(charge_x) < 0.68, np.where(charge_x < 0, -1.0, 1.0), 0.0)
-    axes[1, 1].plot(charge_x, smooth, color=GREEN, label="mobile-carrier solution")
-    axes[1, 1].step(charge_x, rectangular, where="mid", color=ORANGE, linestyle="--", label="depletion approximation")
+    position_m = np.asarray(numerical["position_m"])
+    depletion_charge = np.zeros_like(position_m)
+    p_width = float(depletion["p_width_m"])
+    n_width = float(depletion["n_width_m"])
+    depletion_charge[(position_m >= -p_width) & (position_m < 0.0)] = -Q * acceptor
+    depletion_charge[(position_m >= 0.0) & (position_m <= n_width)] = Q * donor
+    axes[1, 1].plot(
+        position_um,
+        np.asarray(numerical["charge_c_m3"]) / 1.0e3,
+        color=GREEN,
+        label="Poisson--Boltzmann",
+    )
+    axes[1, 1].step(
+        position_um,
+        depletion_charge / 1.0e3,
+        where="mid",
+        color=ORANGE,
+        linestyle="--",
+        label="depletion approximation",
+    )
     axes[1, 1].axhline(0, color="black", linewidth=0.7)
-    axes[1, 1].set(xlabel="position", ylabel=r"$\rho/q$ (normalized)", title="Space-charge transition")
+    axes[1, 1].set(
+        xlabel="position (µm)",
+        ylabel=r"charge density ($10^3$ C m$^{-3}$)",
+        title="Calculated space-charge transition",
+    )
     axes[1, 1].legend()
     _clean(axes[1, 1])
+    figure.suptitle(
+        r"One consistent 300 K junction: "
+        r"$N_A=5\times10^{16}$ cm$^{-3}$, "
+        r"$N_D=10^{16}$ cm$^{-3}$",
+        fontsize=10,
+    )
     _save(figure, "junction-atlas-formation.pdf")
 
 

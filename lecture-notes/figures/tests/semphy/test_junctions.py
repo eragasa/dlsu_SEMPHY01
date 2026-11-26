@@ -12,6 +12,7 @@ from semphy.junctions import (
     built_in_potential,
     depletion_capacitance,
     extract_one_sided_doping,
+    ideal_diffusion_saturation_current_density,
     ideal_diode_current_density,
     minority_diffusion_fd,
     solve_poisson_boltzmann_junction,
@@ -65,6 +66,27 @@ def test_minority_diffusion_matches_finite_base_solution() -> None:
     exact_flux = diffusivity / diffusion_length / np.tanh(length / diffusion_length)
     assert np.linalg.norm(result["excess_m3"] - exact) / np.linalg.norm(exact) < 2e-6
     assert result["particle_flux_m2_s"] == pytest.approx(exact_flux, rel=0.006)
+
+
+def test_diffusion_saturation_current_matches_long_base_formula() -> None:
+    """Minority diffusivities and lifetimes set the long-base saturation current."""
+    acceptor, donor, intrinsic = 5e22, 1e22, 1e16
+    electron_diffusivity, hole_diffusivity = 3.49e-3, 1.24e-3
+    electron_lifetime = hole_lifetime = 1e-6
+    expected = 1.602176634e-19 * intrinsic**2 * (
+        np.sqrt(electron_diffusivity / electron_lifetime) / acceptor
+        + np.sqrt(hole_diffusivity / hole_lifetime) / donor
+    )
+    result = ideal_diffusion_saturation_current_density(
+        acceptor,
+        donor,
+        intrinsic,
+        electron_diffusivity,
+        hole_diffusivity,
+        electron_lifetime,
+        hole_lifetime,
+    )
+    assert result == pytest.approx(expected, rel=1e-14)
 
 
 def test_ideal_diode_has_zero_equilibrium_current() -> None:

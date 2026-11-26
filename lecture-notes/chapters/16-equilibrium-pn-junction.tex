@@ -37,13 +37,65 @@ nonabrupt or processed device.
 
 \section{Contact, diffusion, and thermal equilibrium}
 
-Before contact, the neutral p-region contains approximately $p=N_A$ and the
-neutral n-region contains approximately $n=N_D$.  Their isolated Fermi levels
-therefore differ.  After contact, electrons diffuse from n to p and holes
-diffuse from p to n.  Recombination removes part of this mobile charge near the
-interface.  The uncovered ionized acceptors are negative; the uncovered
-ionized donors are positive.  Their field points from n to p and opposes
-further majority-carrier diffusion.
+\subsection{Before contact}
+
+Consider two homogeneous pieces of the same nondegenerate semiconductor with
+complete dopant ionization before they are allowed to exchange carriers.
+
+\paragraph{n-type region.}
+In the neutral n-type piece, the electron concentration is approximately the
+donor density, while the hole concentration follows from mass action:
+\begin{equation}
+ n_n\simeq N_D,
+ \qquad
+ p_n=\frac{n_i^2}{n_n}\simeq\frac{n_i^2}{N_D},
+ \qquad
+ E_C-E_{F,n}=\kb T\ln\!\left(\frac{N_C}{N_D}\right).
+ \label{eq:pn-isolated-n-region}
+\end{equation}
+The large electron population places $E_{F,n}$ near the conduction-band edge.
+
+\paragraph{p-type region.}
+In the neutral p-type piece, the hole concentration is approximately the
+acceptor density, while the electron concentration follows from mass action:
+\begin{equation}
+ p_p\simeq N_A,
+ \qquad
+ n_p=\frac{n_i^2}{p_p}\simeq\frac{n_i^2}{N_A},
+ \qquad
+ E_{F,p}-E_V=\kb T\ln\!\left(\frac{N_V}{N_A}\right).
+ \label{eq:pn-isolated-p-region}
+\end{equation}
+The large hole population places $E_{F,p}$ near the valence-band edge.
+
+With both pieces expressed in one common band-energy reference,
+\begin{equation}
+ E_{F,n}-E_{F,p}
+ =\kb T\ln\!\left(\frac{N_A N_D}{n_i^2}\right).
+ \label{eq:pn-isolated-fermi-separation}
+\end{equation}
+Each isolated piece is internally in thermal equilibrium, but the two pieces
+are not in \emph{mutual} diffusive equilibrium: their chemical potentials
+are different and carrier exchange has not yet been permitted.
+
+Band alignment before contact requires careful language.  Independent isolated
+bodies have arbitrary electrostatic-potential zeros, so an absolute statement
+that their $E_C$ and $E_V$ values are aligned or misaligned is meaningless
+until a common energy reference is chosen.  For a homojunction made from the
+same semiconductor and drawn on a common vacuum-energy reference, the band
+edges align while the Fermi levels differ, as in
+\cref{fig:junction-atlas-formation}.  A different choice of potential zero can
+rigidly shift all three energies of either isolated piece without changing any
+physics.  Within each uniform neutral piece the bands are flat, and therefore
+no internal electric field exists before contact.
+
+\subsection{After contact and equilibrium}
+
+After contact, electrons diffuse from n to p and holes diffuse from p to n.
+Recombination removes part of this mobile charge near the interface.  The
+uncovered ionized acceptors are negative; the uncovered ionized donors are
+positive.  Their field points from n to p and opposes further majority-carrier
+diffusion.
 
 Thermal equilibrium is reached when drift and diffusion cancel separately for
 electrons and holes.  Setting the electron current to zero gives
@@ -82,11 +134,18 @@ terminals complete the electrochemical-potential balance.
 \begin{figure}[htbp]
  \centering
  \includegraphics[width=\textwidth]{figures/junction-atlas-formation.pdf}
- \caption{Original schematics of junction rectification, isolated p- and n-type
- Fermi levels, the equilibrium band diagram, and the transition from exact
- space charge to the depletion approximation.  These panels cover the physical
- content introduced in Figs.~1--3 of Sze--Lee Chapter~3
- \cite[Sec.~3.1]{szeLee2012}.\figurenotebookmark}
+ \caption{Parameter-consistent calculation for a Si-like abrupt junction with
+ $N_A=5\times10^{16}\,\mathrm{cm^{-3}}$, $N_D=10^{16}\,\mathrm{cm^{-3}}$,
+ $n_i=10^{10}\,\mathrm{cm^{-3}}$, and $T=300\,\mathrm K$.  The rectifying
+ current uses the long-base minority-diffusion model with
+ $\mu_n=1350\,\mathrm{cm^2\,V^{-1}\,s^{-1}}$,
+ $\mu_p=480\,\mathrm{cm^2\,V^{-1}\,s^{-1}}$, and
+ $\tau_n=\tau_p=\SI{1}{\micro\second}$; the isolated Fermi levels
+ follow effective-density-of-states statistics; and the contacted band edges
+ and smooth space charge come from the nonlinear Poisson--Boltzmann solution.
+ The dashed charge profile is the depletion approximation for the same device.
+ These panels cover the physical content introduced in Figs.~1--3 of Sze--Lee
+ Chapter~3 \cite[Sec.~3.1]{szeLee2012}.\figurenotebookmark}
  \label{fig:junction-atlas-formation}
 \end{figure}
 \figurenotebooktext{figures/16_equilibrium-pn-junction/fig_16_01.ipynb}

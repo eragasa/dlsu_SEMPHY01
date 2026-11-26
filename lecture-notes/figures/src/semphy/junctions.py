@@ -443,6 +443,64 @@ def minority_diffusion_fd(
     return {"position_m": position, "excess_m3": excess, "particle_flux_m2_s": particle_flux}
 
 
+def ideal_diffusion_saturation_current_density(
+    acceptor_m3: float,
+    donor_m3: float,
+    intrinsic_m3: float,
+    electron_diffusivity_m2_s: float,
+    hole_diffusivity_m2_s: float,
+    electron_lifetime_s: float,
+    hole_lifetime_s: float,
+) -> float:
+    """Calculate the long-base diffusion saturation-current density.
+
+    Parameters
+    ----------
+    acceptor_m3, donor_m3, intrinsic_m3 : float
+        Positive acceptor, donor, and intrinsic carrier densities in ``m^-3``.
+    electron_diffusivity_m2_s, hole_diffusivity_m2_s : float
+        Positive minority-electron and minority-hole diffusivities in
+        ``m^2 s^-1``.
+    electron_lifetime_s, hole_lifetime_s : float
+        Positive minority-carrier lifetimes in seconds.
+
+    Returns
+    -------
+    float
+        Saturation-current density in ``A m^-2``.
+
+    Notes
+    -----
+    The long-base result is
+    ``q*n_i^2*(D_n/(L_n*N_A) + D_p/(L_p*N_D))``, with
+    ``L_n=sqrt(D_n*tau_n)`` and ``L_p=sqrt(D_p*tau_p)``.
+    """
+    parameters = (
+        acceptor_m3,
+        donor_m3,
+        intrinsic_m3,
+        electron_diffusivity_m2_s,
+        hole_diffusivity_m2_s,
+        electron_lifetime_s,
+        hole_lifetime_s,
+    )
+    if min(parameters) <= 0.0:
+        raise ValueError("densities, diffusivities, and lifetimes must be positive")
+    electron_diffusion_length = np.sqrt(
+        electron_diffusivity_m2_s * electron_lifetime_s
+    )
+    hole_diffusion_length = np.sqrt(hole_diffusivity_m2_s * hole_lifetime_s)
+    return float(
+        Q
+        * intrinsic_m3**2
+        * (
+            electron_diffusivity_m2_s
+            / (electron_diffusion_length * acceptor_m3)
+            + hole_diffusivity_m2_s / (hole_diffusion_length * donor_m3)
+        )
+    )
+
+
 def ideal_diode_current_density(
     voltage_v: np.ndarray | float,
     saturation_current_a_m2: float,
